@@ -1,0 +1,25 @@
+{
+  "profile": {
+    "name": "Vera Sakhno",
+    "role": "QA Engineer / Test Analyst / Quality Specialist"
+  },
+  "experience": [
+    {
+      "company": "Nimbus Systems",
+      "title": "QA Engineer",
+      "summary": "Tested web and API features, authored test cases, and tracked defects."
+    }
+  ],
+  "keySkills": {
+    "Testing & Analysis": [
+      "Test case design",
+      "Defect reporting",
+      "Exploratory testing"
+    ],
+    "Documentation": [
+      "Test plans",
+      "Release notes",
+      "QA checklists"
+    ]
+  }
+}
