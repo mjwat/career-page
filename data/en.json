@@ -1,25 +1,169 @@
 {
-  "profile": {
-    "name": "Vera Sakhno",
-    "role": "QA Engineer / Test Analyst / Quality Specialist"
-  },
-  "experience": [
-    {
-      "company": "Nimbus Systems",
-      "title": "QA Engineer",
-      "summary": "Tested web and API features, authored test cases, and tracked defects."
-    }
-  ],
-  "keySkills": {
-    "Testing & Analysis": [
-      "Test case design",
-      "Defect reporting",
-      "Exploratory testing"
+    "profile": {
+      "name": "Vera Sakhno",
+      "role": "QA Engineer / Test Analyst / Quality Specialist",
+      "location": "Portugal",
+      "summary": "Experienced in functional testing of web and mobile applications, requirements analysis, and identifying risks and gaps. Skilled in defining testing strategies aligned with project objectives. I support teams in delivering products with a predictable level of quality and take a practical, thoughtful approach to testing."
+    },
+    "contact": {
+      "email": "sakhnover@gmail.com",
+      "linkedin": "https://linkedin.com/in/vera-sakhno"
+    },
+    "experience": [
+      {
+        "company": "Oggetto",
+        "type": "Service Company",
+        "period": "2017 – 2025",
+        "role": "Quality Assurance Specialist",
+        "projects": ["Comfy", "L’Oréal", "Puma", "Canon", "Other e-commerce projects"],
+        "stack": [
+          "Web", "Mobile (iOS, Android)", "Magento", "Jira", "Redmine", "Trello",
+          "TestLink", "DevTools", "Postman", "Altair", "cURL", "REST", "GraphQL",
+          "CLI/SSH", "MySQL", "Selenium WebDriver (Java/JS)", "Mockoon",
+          "Graylog", "Jenkins", "Flutter", "Figma", "Notion",
+          "Google Docs/Sheets", "Confluence"
+        ],
+        "responsibilities": {
+          "project": [
+            "Analyze requirements, business logic, user flows and designs",
+            "Perform functional, regression, smoke and exploratory testing",
+            "Test web and mobile applications",
+            "Perform API testing (REST / GraphQL) and database testing (MySQL)",
+            "Track and document defects",
+            "Create and maintain test documentation",
+            "Test third-party integrations",
+            "Analyze logs using CLI and Graylog",
+            "Collaborate with product managers, developers, analysts and designers"
+          ],
+          "internal": [
+            "Conduct interviews for QA candidates",
+            "Mentor interns and onboard new team members"
+          ]
+        },
+        "achievements": {
+          "project": [
+            "Contributed to launch of 10+ multilingual projects (teams of 5–25)",
+            "Defined and formalized testing approaches per project",
+            "Updated and implemented UI automation using Selenium WebDriver",
+            "Maintained and extended third-party mocks using Mockoon"
+          ],
+          "internal": [
+            "Developed standardized QA documentation templates",
+            "Created Magento onboarding guide reducing onboarding time from ~100h to ~10h",
+            "Designed and implemented QA onboarding processes",
+            "Trained and mentored 20+ QA engineers",
+            "Conducted 40+ interviews"
+          ]
+        }
+      },
+      {
+        "company": "404Hub",
+        "type": "Startup",
+        "period": "2024 – 2025",
+        "role": "Test Engineer / Test Analyst",
+        "projects": ["404Hub (Educational Platform)", "YHub (Hosting Service)"],
+        "stack": ["Web", "Telegram Bot", "ClickUp", "DevTools", "Postman", "REST", "CLI/SSH", "MySQL", "Figma", "Miro"],
+        "responsibilities": {
+          "project": [
+            "Test Telegram bot migration to web platform",
+            "Perform functional and UI testing",
+            "Evaluate usability and UX",
+            "Prepare bug reports and improvement recommendations",
+            "Participate in service component design"
+          ]
+        },
+        "achievements": {
+          "project": [
+            "Refined incomplete user scenarios improving feature delivery",
+            "Created comprehensive service test model including API and entity relationships"
+          ]
+        }
+      },
+      {
+        "company": "Ruta",
+        "type": "Startup",
+        "period": "2022 – 2023",
+        "role": "Test Engineer / Test Analyst",
+        "projects": ["RutaJob (Recruitment Platform)"],
+        "stack": ["Web", "Trello", "DevTools", "Postman", "CLI/SSH", "MySQL", "Figma", "Miro"],
+        "responsibilities": {
+          "project": [
+            "Perform functional and UI testing",
+            "Validate implementation against design mockups",
+            "Define user scenarios for multiple roles",
+            "Collaborate with product owner and developers"
+          ]
+        },
+        "achievements": {
+          "project": [
+            "Helped define MVP requirements and priorities",
+            "Identified critical defects in matching logic",
+            "Created structured test checklist and system-level test report"
+          ]
+        }
+      },
+      {
+        "company": "Newizze",
+        "type": "Service Company",
+        "period": "2021",
+        "role": "Tester",
+        "projects": ["Personal Account Portal for Utility Service Providers"],
+        "stack": ["Web", "Trello", "DevTools", "MySQL", "CLI/SSH", "Miro"],
+        "responsibilities": {
+          "project": [
+            "Test backend-focused service",
+            "Prepare bug reports and perform re-testing",
+            "Collaborate directly with developers"
+          ]
+        },
+        "achievements": {
+          "project": [
+            "Identified requirement gaps balancing compliance and usability",
+            "Ensured stable release without critical issues"
+          ]
+        }
+      },
+      {
+        "company": "Oggetto",
+        "type": "Service Company",
+        "period": "2016 – 2017",
+        "role": "Technical Support Specialist",
+        "stack": ["Service Desk", "Redmine", "Magento", "Google Docs"],
+        "responsibilities": {
+          "project": [
+            "Register and classify support requests",
+            "Resolve standard issues",
+            "Escalate complex requests",
+            "Monitor SLA compliance"
+          ]
+        },
+        "achievements": {
+          "project": [
+            "Reduced third-line escalations by more than 50%",
+            "Created and maintained support knowledge base",
+            "Onboarded new support specialists"
+          ]
+        }
+      }
     ],
-    "Documentation": [
-      "Test plans",
-      "Release notes",
-      "QA checklists"
-    ]
+    "education": [
+      {
+        "degree": "Bachelor's degree in Industrial and Civil Engineering",
+        "period": "2011 – 2015"
+      }
+    ],
+    "certifications": [
+      "ISTQB Certified Tester (2018)"
+    ],
+    "languages": [
+      "Russian — Native",
+      "English — Upper-Intermediate (B2)",
+      "Portuguese — Basic (A1)"
+    ],
+    "preferences": {
+      "workType": "Remote contract or freelance only",
+      "restrictions": "Not considering gambling or betting projects"
+    },
+    "about": "Passionate about software testing and understanding system design. I connect requirements, implementation and real user experience. Extensive experience in e-commerce and early-stage startups. Value honesty and accuracy in both work and life."
   }
-}
+  
