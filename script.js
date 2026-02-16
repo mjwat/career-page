@@ -9,7 +9,6 @@ async function loadData() {
   const contactEl = ensureSection(app, "contact");
   const experienceEl = ensureSection(app, "experience");
   const educationEl = ensureSection(app, "education");
-  const certificationsEl = ensureSection(app, "certifications");
   const languagesEl = ensureSection(app, "languages");
   const preferencesEl = ensureSection(app, "preferences");
   const aboutEl = ensureSection(app, "about");
@@ -30,14 +29,12 @@ async function loadData() {
   renderEducation(educationEl, data.education);
   console.log("Education", data.education);
 
-  renderCertifications(certificationsEl, data.certifications);
-  console.log("Certifications", data.certifications);
-
   renderLanguages(languagesEl, data.languages);
   console.log("Languages", data.languages);
 
-  renderPreferences(preferencesEl, data.workPreferences);
-  console.log("Preferences", data.workPreferences);
+  const preferencesText = data.preferences ?? data.workPreferences;
+  renderPreferences(preferencesEl, preferencesText);
+  console.log("Preferences", preferencesText);
 
   renderAbout(aboutEl, data.about);
   console.log("About", data.about);
@@ -88,25 +85,24 @@ function renderContact(container, contact) {
 }
 
 function renderExperience(container, items = []) {
-  const articles = items
-    .map((item) => {
-      const responsibilities = renderGroupedList("Responsibilities", item.responsibilities);
-      const achievements = renderGroupedList("Achievements", item.achievements);
+  let articles = "";
+  items.forEach((item) => {
+    const responsibilities = renderGroupedOrFlatList("Responsibilities", item.responsibilities);
+    const achievements = renderGroupedOrFlatList("Achievements", item.achievements);
 
-      return `
-        <article>
-          <h3>${escapeHtml(item.company)}</h3>
-          <p>${escapeHtml(item.companyType || "")}</p>
-          <p>${escapeHtml(item.position || "")}</p>
-          <p>${escapeHtml(item.period || "")}</p>
-          ${item.projects ? `<p>${escapeHtml(item.projects)}</p>` : ""}
-          ${item.stack ? `<p>${escapeHtml(item.stack)}</p>` : ""}
-          ${responsibilities}
-          ${achievements}
-        </article>
-      `;
-    })
-    .join("");
+    articles += `
+      <article>
+        <p>${escapeHtml(item.position || "")}</p>
+        <p>${escapeHtml(item.company || "")} (${escapeHtml(item.companyType || "")}), ${escapeHtml(item.period || "")}</p>
+        ${item.projects ? `<p>Projects: ${escapeHtml(item.projects)}</p>` : ""}
+        ${item.stack ? `<p>Stack: ${escapeHtml(item.stack)}</p>` : ""}
+        ${responsibilities}
+        ${achievements}
+      </article>
+    `;
+
+    console.log(`Experience entry rendered: ${item.company}`);
+  });
 
   container.innerHTML = `
     <section>
@@ -125,15 +121,6 @@ function renderEducation(container, items = []) {
   `;
 }
 
-function renderCertifications(container, items = []) {
-  container.innerHTML = `
-    <section>
-      <h2>Certifications</h2>
-      ${renderList(items)}
-    </section>
-  `;
-}
-
 function renderLanguages(container, items = []) {
   container.innerHTML = `
     <section>
@@ -144,10 +131,14 @@ function renderLanguages(container, items = []) {
 }
 
 function renderPreferences(container, workPreferences) {
+  const paragraphs = splitIntoParagraphs(workPreferences)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+
   container.innerHTML = `
     <section>
       <h2>Preferences</h2>
-      ${workPreferences ? `<p>${escapeHtml(workPreferences)}</p>` : ""}
+      ${paragraphs}
     </section>
   `;
 }
@@ -171,36 +162,34 @@ function renderKeySkills(container, keySkills) {
     return;
   }
 
-  const categories = Object.entries(keySkills)
-    .map(([category, items]) => {
-      if (category === "Tools & Technologies" && items && typeof items === "object") {
-        const subcategories = Object.entries(items)
-          .map(([subCategory, subItems]) => {
-            return `
-              <li>
-                ${escapeHtml(subCategory)}
-                ${renderList(subItems)}
-              </li>
-            `;
-          })
-          .join("");
+  let categories = "";
+  Object.entries(keySkills).forEach(([category, items]) => {
+    if (category === "Tools & Technologies" && items && typeof items === "object") {
+      const subcategories = Object.entries(items)
+        .map(([subCategory, subItems]) => {
+          const line = Array.isArray(subItems) ? subItems.join(", ") : "";
+          return `<li>${escapeHtml(subCategory)}: ${escapeHtml(line)}</li>`;
+        })
+        .join("");
 
-        return `
-          <section>
-            <h3>${escapeHtml(category)}</h3>
-            <ul>${subcategories}</ul>
-          </section>
-        `;
-      }
-
-      return `
+      categories += `
         <section>
           <h3>${escapeHtml(category)}</h3>
-          ${renderList(items)}
+          <ul>${subcategories}</ul>
         </section>
       `;
-    })
-    .join("");
+      console.log(`Key Skills category rendered: ${category}`);
+      return;
+    }
+
+    categories += `
+      <section>
+        <h3>${escapeHtml(category)}</h3>
+        ${renderList(items)}
+      </section>
+    `;
+    console.log(`Key Skills category rendered: ${category}`);
+  });
 
   container.innerHTML = `
     <section>
@@ -210,26 +199,42 @@ function renderKeySkills(container, keySkills) {
   `;
 }
 
-function renderGroupedList(title, groups) {
+function renderGroupedOrFlatList(title, groups) {
   if (!groups || typeof groups !== "object") {
     return "";
   }
 
-  const entries = Object.entries(groups)
-    .map(([groupName, items]) => {
-      return `
+  const projectRelated = groups["Project-related"];
+  const nonProjectRelated = groups["Non-project-related"];
+  const hasProjectRelated = Array.isArray(projectRelated) && projectRelated.length > 0;
+  const hasNonProjectRelated =
+    Array.isArray(nonProjectRelated) && nonProjectRelated.length > 0;
+
+  if (hasProjectRelated && hasNonProjectRelated) {
+    return `
+      <section>
+        <h4>${escapeHtml(title)}</h4>
         <section>
-          <h4>${escapeHtml(groupName)}</h4>
-          ${renderList(items)}
+          <h5>Project-related</h5>
+          ${renderList(projectRelated)}
         </section>
-      `;
-    })
-    .join("");
+        <section>
+          <h5>Non-project-related</h5>
+          ${renderList(nonProjectRelated)}
+        </section>
+      </section>
+    `;
+  }
+
+  const flatItems = hasProjectRelated ? projectRelated : nonProjectRelated;
+  if (!flatItems) {
+    return "";
+  }
 
   return `
     <section>
       <h4>${escapeHtml(title)}</h4>
-      ${entries}
+      ${renderList(flatItems)}
     </section>
   `;
 }
@@ -249,6 +254,20 @@ function renderParagraphs(text) {
     .split("\n\n")
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
     .join("");
+}
+
+function splitIntoParagraphs(text) {
+  if (!text) {
+    return [];
+  }
+
+  if (text.includes("\n")) {
+    return text.split(/\r?\n+/).filter((line) => line.trim().length > 0);
+  }
+
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .filter((line) => line.trim().length > 0);
 }
 
 function escapeHtml(value) {
