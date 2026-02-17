@@ -62,7 +62,7 @@ function renderProfile(container, profile) {
   const name = profile?.name || "";
   const extraFields = Object.entries(profile || {})
     .filter(([key]) => key !== "name")
-    .map(([key, value]) => `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</p>`)
+    .map(([, value]) => `<p>${escapeHtml(value)}</p>`)
     .join("");
 
   container.innerHTML = `
@@ -183,7 +183,7 @@ function renderExperience(container, block) {
   const articles = (block?.items || [])
     .map((item) => {
       const position = item?.position
-        ? `<p><strong>${escapeHtml(labels.position || "position")}:</strong> ${escapeHtml(item.position)}</p>`
+        ? `<p>${escapeHtml(item.position)}</p>`
         : "";
 
       const companyParts = [];
@@ -196,7 +196,7 @@ function renderExperience(container, block) {
         companyParts.push(item.period);
       }
       const company = companyParts.length
-        ? `<p><strong>${escapeHtml(labels.company || "company")}:</strong> ${escapeHtml(companyParts.join(", "))}</p>`
+        ? `<p>${escapeHtml(companyParts.join(", "))}</p>`
         : "";
 
       const projects = item?.projects
