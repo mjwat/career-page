@@ -15,7 +15,10 @@
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         const selectedLanguage = button.dataset.lang;
-        if (!SUPPORTED_LANGUAGES.includes(selectedLanguage)) {
+        if (
+          !SUPPORTED_LANGUAGES.includes(selectedLanguage) ||
+          selectedLanguage === window.currentLanguage
+        ) {
           return;
         }
 
@@ -37,6 +40,8 @@
     buttons.forEach((button) => {
       const isActive = button.dataset.lang === language;
       button.setAttribute("aria-pressed", String(isActive));
+      button.toggleAttribute("disabled", isActive);
+      button.setAttribute("data-active", String(isActive));
     });
   }
 
