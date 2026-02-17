@@ -4,8 +4,10 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const initialLanguage = getStoredLanguage();
+    window.currentLanguage = initialLanguage;
     setActiveLanguageButton(initialLanguage);
     bindLanguageButtons();
+    notifyLanguageChange(initialLanguage);
   });
 
   function bindLanguageButtons() {
@@ -17,6 +19,7 @@
           return;
         }
 
+        window.currentLanguage = selectedLanguage;
         localStorage.setItem(LANGUAGE_STORAGE_KEY, selectedLanguage);
         setActiveLanguageButton(selectedLanguage);
         notifyLanguageChange(selectedLanguage);

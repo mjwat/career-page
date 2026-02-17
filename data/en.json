@@ -1,77 +1,153 @@
-  {
-    "profile": {
-        "name": "Vera Sakhno",
-        "title": "QA Engineer / Test Analyst / Quality Specialist"
-    },    
-    "contact": {
-      "email": "sakhnover@gmail.com",
-      "linkedin": "http://linkedin.com/in/vera-sakhno",
-      "location": "Portugal"
+{
+  "profile": {
+    "name": "Vera Sakhno",
+    "title": "QA Engineer / Test Analyst / Quality Specialist"
+  },
+  "contact": {
+    "title": "Contact",
+    "labels": {
+      "email": "Email",
+      "linkedin": "LinkedIn",
+      "location": "Location"
     },
-    "summary": "Experienced in functional testing of web and mobile applications, requirements analysis, and identifying risks and gaps. Skilled in defining testing strategies aligned with project objectives.\n\nI support teams in delivering products with a predictable level of quality and take a practical, thoughtful approach to testing, tailoring the level of formalization to project goals and maturity.",
-    "keySkills": {
-      "Testing & Analysis": [
-        "Perform functional, regression, and exploratory testing",
-        "Define test priorities to ensure meaningful coverage of business-critical functionality",
-        "Identify, localize, and assess defect severity",
-        "Analyze requirements, business logic, user flows and designs",
-        "Work with incomplete, ambiguous, or conflicting requirements",
-        "Identify product risks and edge cases",
-        "Define and adapt testing strategies aligned with project objectives",
-        "Establish clear, repeatable, and transparent testing processes"
-      ],
-      "Documentation": [
-        "Create and maintain checklists, test cases, and test plans",
-        "Prepare test execution and defect reports",
-        "Build mind maps, test models, traceability matrices, and state/transition diagrams",
-        "Select appropriate documentation formalization based on project context"
-      ],
-      "Application Types": [
-        "Web applications",
-        "Mobile applications (iOS / Android)",
-        "Backend systems and APIs"
-      ],
-      "Tools & Technologies": {
-        "Tasks & defect tracking": ["Jira", "Redmine", "Trello", "ClickUp"],
-        "Test management": ["TestLink"],
-        "API": ["Postman", "Altair", "cURL"],
-        "Databases": ["MySQL"],
-        "Automation": [
-          "Selenium WebDriver (Java / JS)",
-          "Pytest (Python)",
-          "Katalon Studio",
-          "Git",
-          "Mockoon",
-          "Jenkins"
-        ],
-        "Debugging & monitoring": [
-          "Browser DevTools",
-          "CLI",
-          "Graylog",
-          "SSH"
-        ],
-        "Mobile testing": [
-          "TestFlight",
-          "Crashlytics",
-          "Charles",
-          "BrowserStack",
-          "Flutter"
-        ],
-        "Documentation": [
-          "Google Docs/Sheets",
-          "Confluence",
-          "Notion",
-          "Swagger"
-        ],
-        "Diagramming & design": [
-          "Miro",
-          "Figma",
-          "Balsamiq",
-          "XMind"
+    "email": "sakhnover@gmail.com",
+    "linkedin": "http://linkedin.com/in/vera-sakhno",
+    "location": "Portugal"
+  },
+  "summary": {
+    "title": "Summary",
+    "text": "Experienced in functional testing of web and mobile applications, requirements analysis, and identifying risks and gaps. Skilled in defining testing strategies aligned with project objectives.\n\nI support teams in delivering products with a predictable level of quality and take a practical, thoughtful approach to testing, tailoring the level of formalization to project goals and maturity."
+  },
+  "keySkills": {
+    "title": "Key Skills",
+    "categories": {
+      "testingAnalysis": {
+        "title": "Testing & Analysis",
+        "items": [
+          "Perform functional, regression, and exploratory testing",
+          "Define test priorities to ensure meaningful coverage of business-critical functionality",
+          "Identify, localize, and assess defect severity",
+          "Analyze requirements, business logic, user flows and designs",
+          "Work with incomplete, ambiguous, or conflicting requirements",
+          "Identify product risks and edge cases",
+          "Define and adapt testing strategies aligned with project objectives",
+          "Establish clear, repeatable, and transparent testing processes"
         ]
+      },
+      "documentation": {
+        "title": "Documentation",
+        "items": [
+          "Create and maintain checklists, test cases, and test plans",
+          "Prepare test execution and defect reports",
+          "Build mind maps, test models, traceability matrices, and state/transition diagrams",
+          "Select appropriate documentation formalization based on project context"
+        ]
+      },
+      "applicationTypes": {
+        "title": "Application Types",
+        "items": [
+          "Web applications",
+          "Mobile applications (iOS / Android)",
+          "Backend systems and APIs"
+        ]
+      },
+      "toolsTechnologies": {
+        "title": "Tools & Technologies",
+        "categories": {
+          "tasksDefectTracking": {
+            "title": "Tasks & defect tracking",
+            "items": [
+              "Jira",
+              "Redmine",
+              "Trello",
+              "ClickUp"
+            ]
+          },
+          "testManagement": {
+            "title": "Test management",
+            "items": [
+              "TestLink"
+            ]
+          },
+          "api": {
+            "title": "API",
+            "items": [
+              "Postman",
+              "Altair",
+              "cURL"
+            ]
+          },
+          "databases": {
+            "title": "Databases",
+            "items": [
+              "MySQL"
+            ]
+          },
+          "automation": {
+            "title": "Automation",
+            "items": [
+              "Selenium WebDriver (Java / JS)",
+              "Pytest (Python)",
+              "Katalon Studio",
+              "Git",
+              "Mockoon",
+              "Jenkins"
+            ]
+          },
+          "debuggingMonitoring": {
+            "title": "Debugging & monitoring",
+            "items": [
+              "Browser DevTools",
+              "CLI",
+              "Graylog",
+              "SSH"
+            ]
+          },
+          "mobileTesting": {
+            "title": "Mobile testing",
+            "items": [
+              "TestFlight",
+              "Crashlytics",
+              "Charles",
+              "BrowserStack",
+              "Flutter"
+            ]
+          },
+          "documentation": {
+            "title": "Documentation",
+            "items": [
+              "Google Docs/Sheets",
+              "Confluence",
+              "Notion",
+              "Swagger"
+            ]
+          },
+          "diagrammingDesign": {
+            "title": "Diagramming & design",
+            "items": [
+              "Miro",
+              "Figma",
+              "Balsamiq",
+              "XMind"
+            ]
+          }
+        }
       }
+    }
+  },
+  "professionalExperience": {
+    "title": "Professional Experience",
+    "labels": {
+      "position": "Position",
+      "company": "Company",
+      "projects": "Projects",
+      "stack": "Stack",
+      "responsibilities": "Responsibilities",
+      "achievements": "Achievements",
+      "projectRelated": "Project-related",
+      "nonProjectRelated": "Non-project-related"
     },
-    "professionalExperience": [
+    "items": [
       {
         "position": "Quality Assurance Specialist",
         "company": "Oggetto",
@@ -80,7 +156,7 @@
         "projects": "Comfy, L’Oréal, Puma, Canon, and others | E-commerce",
         "stack": "Web and Mobile (iOS, Android), Magento, Jira, Redmine, Trello, TestLink, DevTools, Postman, Altair, cURL, REST, CLI/SSH, MySQL, GraphQL, Selenium WebDriver (Java / JS), Mockoon, Graylog, Jenkins, Flutter, FileZilla, Figma, Notion, Google Docs/Sheets, Confluence",
         "responsibilities": {
-          "Project-related": [
+          "projectRelated": [
             "Analyze requirements (business logic, user scenarios, design specifications)",
             "Test web and mobile applications (iOS, Android)",
             "Plan and execute functional, regression, smoke, and exploratory testing",
@@ -92,20 +168,20 @@
             "Analyze logs using CLI tools and Graylog",
             "Collaborate closely with product managers, developers, analysts, and designers"
           ],
-          "Non-project-related": [
+          "nonProjectRelated": [
             "Conduct interviews for interns and experienced QA specialists",
             "Mentor interns and onboard new team members"
           ]
         },
         "achievements": {
-          "Project-related": [
+          "projectRelated": [
             "Contributed to the launch of 10+ new projects (multilingual, teams of 5–25 people, project durations from 2 to 6 months), ensuring the required quality level at release",
             "Developed standardized test documentation templates for the QA department, simplifying project onboarding for new team members and reducing reporting errors through unified documentation requirements (e.g., mandatory test data, screenshots, environment, etc.)",
             "Defined and formalized a testing approach for each project, aligning team and client expectations regarding test scope and format (documentation detail level, test priorities, supported browsers and devices, etc.) and reducing pre-release conflicts",
             "Updated UI automated tests after a major redesign on one project (Selenium WebDriver + Java); on another project, automated critical end-to-end scenarios (Selenium WebDriver + Java / JavaScript), enabling early detection of critical failures, including those related to third-party integrations, and timely communication with stakeholders",
             "Maintained and extended mocks for third-party services (using Mockoon) in the absence of test environments, allowing testing activities to continue without integration-related blockers"
           ],
-          "Non-project-related": [
+          "nonProjectRelated": [
             "Created a concise Magento platform guide (10 short articles instead of a 2000+ page PDF), reducing onboarding time for new QA engineers from ~100 hours to ~10 hours and significantly decreasing the number of common mistakes and recurring questions",
             "Designed and implemented QA onboarding and training processes, enabling new team members to reach independent productivity faster, reducing onboarding frustration, and increasing overall satisfaction among QA engineers, managers, and development teams through clear expectations, structured workflows, and defined feedback points",
             "Trained and mentored 20+ QA engineers",
@@ -122,19 +198,21 @@
         "projects": "404Hub | Educational platform, YHub | Hosting service",
         "stack": "Web, Telegram Bot, ClickUp, DevTools, Postman, REST, CLI/SSH, MySQL, Figma, Miro, Google Docs/Sheets",
         "responsibilities": {
-          "Project-related": [
+          "projectRelated": [
             "Perform testing of Telegram bot functionality migration to a new web platform during the initial phase",
             "Conduct functional and UI testing based on mockups and design specifications",
             "Evaluate usability and overall user experience",
             "Prepare detailed bug reports and provide improvement recommendations",
             "Participate in designing new service components in collaboration with the lead developer"
-          ]
+          ],
+          "nonProjectRelated": []
         },
         "achievements": {
-          "Project-related": [
+          "projectRelated": [
             "Identified and refined incomplete user scenarios, reducing the number of stalled features and increasing the practical value of implemented functionality",
             "Created a comprehensive test model of the service (including API methods, entities, and their relationships) based on both implemented and planned functionality, enabling clear visualization of system dependencies and supporting task prioritization and workload distribution among developers"
-          ]
+          ],
+          "nonProjectRelated": []
         }
       },
       {
@@ -145,19 +223,21 @@
         "projects": "RutaJob | Recruitment Platform",
         "stack": "Web, Trello, DevTools, Postman, CLI/SSH, MySQL, Figma, Miro, Google Docs/Sheets",
         "responsibilities": {
-          "Project-related": [
+          "projectRelated": [
             "Perform functional and UI testing, including validation against design mockups, and evaluated usability",
             "Report identified issues and provided improvement recommendations",
             "Define and documented user scenarios for three roles: employer, employer representative, and job seeker",
             "Collaborate with the product owner, developers, and designers"
-          ]
+          ],
+          "nonProjectRelated": []
         },
         "achievements": {
-          "Project-related": [
+          "projectRelated": [
             "Collaborated with the team to define the minimum viable requirements and development priorities, enabling faster validation of the product hypothesis and early prototype delivery to initial loyal users without excessive development effort",
             "Identified critical defects in the job-to-candidate matching calculation logic",
             "Created a structured test checklist and transformed it into a comprehensive test report covering the entire system functionality, clearly highlighting inconsistencies and implementation gaps"
-          ]
+          ],
+          "nonProjectRelated": []
         }
       },
       {
@@ -168,18 +248,20 @@
         "projects": "Personal Account Portal for Utility Service Providers",
         "stack": "Web, Trello, DevTools, MySQL, CLI/SSH, Miro, Google Docs/Sheets",
         "responsibilities": {
-          "Project-related": [
+          "projectRelated": [
             "Test the service (primarily backend, minimal frontend) and assessed release readiness",
             "Prepare detailed bug reports",
             "Perform re-testing after bug fixes",
             "Collaborate directly with developers (no dedicated project manager involved)"
-          ]
+          ],
+          "nonProjectRelated": []
         },
         "achievements": {
-          "Project-related": [
+          "projectRelated": [
             "Identified and clarified requirement gaps (e.g., media formats and size limitations, mandatory fields), helping balance regulatory compliance, usability for users of different age groups, and product release timelines",
             "Conducted exploratory testing and reported defects, helping ensure a stable release without critical issues, which resulted in positive feedback from early users."
-          ]
+          ],
+          "nonProjectRelated": []
         }
       },
       {
@@ -187,35 +269,49 @@
         "company": "Oggetto",
         "companyType": "Service Company",
         "period": "2016 - 2017",
+        "projects": "",
         "stack": "Service Desk, Redmine, Magento, Google Docs",
         "responsibilities": {
-          "Project-related": [
+          "projectRelated": [
             "Register and classified incoming support requests",
             "Resolve standard user issues",
             "Escalate complex requests to third-line support",
             "Monitor SLA compliance and response timelines"
-          ]
+          ],
+          "nonProjectRelated": []
         },
         "achievements": {
-          "Project-related": [
+          "projectRelated": [
             "Created and maintained a knowledge base for the support team, improving request classification accuracy (in line with SLA requirements) and gradually expanding the scope of issues resolved without engineering involvement, reducing third-line escalations by more than 50%",
             "Trained and onboarded three new support specialists, ensuring a smooth transition and uninterrupted team performance",
             "Studied the QA knowledge base, reducing resolution time for support requests; progressively took on simple testing tasks upon request from project managers, helping reduce project team workload and accelerate release cycles"
-          ]
+          ],
+          "nonProjectRelated": []
         }
-      }      
-      
-    ],
-    "education": [
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "items": [
       "Bachelor's degree in industrial and civil engineering, 2011 - 2015",
       "ISTQB Certified Tester, 2018"
-    ],
-    "languages": [
+    ]
+  },
+  "languages": {
+    "title": "Languages",
+    "items": [
       "Russian — Native",
       "English — Upper-Intermediate (B2)",
       "Portuguese — Basic (A1, currently learning)"
-    ],
-    "about": "Passionate about software testing and genuinely interested in understanding how systems are designed and why they work the way they do.\n\nI believe it is essential to understand the product’s purpose and assess the real risks affecting its quality.\n\nWhile familiar with test automation and management processes, I bring the greatest value as a QA Engineer / Test Analyst — connecting requirements, implementation, and real user experience.\n\nI believe automation and complex processes are not justified for every project and should be applied thoughtfully and pragmatically.\n\nExtensive experience in e-commerce, having tested online stores at various stages — from initial launch to continuous releases for active user bases.\n\nAlso experienced in early-stage startups, working with ambiguous requirements, hypothesis validation, and tight timelines.\n\nMy main values are honesty and accuracy both in work and in life.",
-    "workPreferences": "Open to remote contract or freelance opportunities only.\n\nNOT considering projects related to gambling or betting."
+    ]
+  },
+  "about": {
+    "title": "About",
+    "text": "Passionate about software testing and genuinely interested in understanding how systems are designed and why they work the way they do.\n\nI believe it is essential to understand the product’s purpose and assess the real risks affecting its quality.\n\nWhile familiar with test automation and management processes, I bring the greatest value as a QA Engineer / Test Analyst — connecting requirements, implementation, and real user experience.\n\nI believe automation and complex processes are not justified for every project and should be applied thoughtfully and pragmatically.\n\nExtensive experience in e-commerce, having tested online stores at various stages — from initial launch to continuous releases for active user bases.\n\nAlso experienced in early-stage startups, working with ambiguous requirements, hypothesis validation, and tight timelines.\n\nMy main values are honesty and accuracy both in work and in life."
+  },
+  "workPreferences": {
+    "title": "Work Preferences",
+    "text": "Open to remote contract or freelance opportunities only.\n\nNOT considering projects related to gambling or betting."
   }
-  
+}

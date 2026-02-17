@@ -3,21 +3,20 @@ const SUPPORTED_LANGUAGES = ["en", "ru"];
 let currentRenderId = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderFromStorage();
+  renderLanguage(getCurrentLanguage());
 });
 
-document.addEventListener("resume-language-change", (event) => {
-  const language = event.detail?.language;
-  renderLanguage(language);
+document.addEventListener("resume-language-change", () => {
+  renderLanguage(getCurrentLanguage());
 });
 
-function getStoredLanguage() {
+function getCurrentLanguage() {
+  if (SUPPORTED_LANGUAGES.includes(window.currentLanguage)) {
+    return window.currentLanguage;
+  }
+
   const savedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY);
   return SUPPORTED_LANGUAGES.includes(savedLanguage) ? savedLanguage : "en";
-}
-
-function renderFromStorage() {
-  renderLanguage(getStoredLanguage());
 }
 
 async function renderLanguage(language) {
@@ -41,199 +40,189 @@ async function fetchLanguageData(language) {
 }
 
 function renderCv(data) {
-  const app = document.getElementById("app");
-  const profileEl = ensureSection(app, "profile");
-  const contactEl = ensureSection(app, "contact");
-  const summaryEl = ensureSection(app, "summary");
-  const keySkillsEl = ensureSection(app, "keySkills");
-  const experienceEl = ensureSection(app, "experience");
-  const educationEl = ensureSection(app, "education");
-  const languagesEl = ensureSection(app, "languages");
-  const aboutEl = ensureSection(app, "about");
-  const preferencesEl = ensureSection(app, "preferences");
-
-  renderProfile(profileEl, data.profile);
-  renderContact(contactEl, data.contact);
-  renderSummary(summaryEl, data.summary);
-  renderKeySkills(keySkillsEl, data.keySkills);
-  renderExperience(experienceEl, data.professionalExperience);
-  renderEducation(educationEl, data.education);
-  renderLanguages(languagesEl, data.languages);
-  renderAbout(aboutEl, data.about);
-  renderPreferences(preferencesEl, data.preferences ?? data.workPreferences);
-}
-
-function ensureSection(parent, id) {
-  let section = document.getElementById(id);
-  if (!section) {
-    section = document.createElement("section");
-    section.id = id;
-    parent.append(section);
-  }
-  return section;
+  renderProfile(document.getElementById("profile"), data.profile);
+  renderContact(document.getElementById("contact"), data.contact);
+  renderTextBlock(document.getElementById("summary"), data.summary);
+  renderKeySkills(document.getElementById("keySkills"), data.keySkills);
+  renderExperience(
+    document.getElementById("experience"),
+    data.professionalExperience
+  );
+  renderListBlock(document.getElementById("education"), data.education);
+  renderListBlock(document.getElementById("languages"), data.languages);
+  renderTextBlock(document.getElementById("about"), data.about);
+  renderTextBlock(document.getElementById("preferences"), data.workPreferences);
 }
 
 function renderProfile(container, profile) {
+  if (!container) {
+    return;
+  }
+
+  const name = profile?.name || "";
+  const extraFields = Object.entries(profile || {})
+    .filter(([key]) => key !== "name")
+    .map(([key, value]) => `<p><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</p>`)
+    .join("");
+
   container.innerHTML = `
     <header>
-      <h1>${escapeHtml(profile?.name || "")}</h1>
-      <p>${escapeHtml(profile?.title || "")}</p>
+      <h1>${escapeHtml(name)}</h1>
+      ${extraFields}
     </header>
   `;
 }
 
-function renderContact(container, contact) {
-  container.innerHTML = `
-    <section>
-      <h2>Contact</h2>
-      <ul>
-        ${contact?.email ? `<li>Email: <a href="mailto:${escapeAttr(contact.email)}">${escapeHtml(contact.email)}</a></li>` : ""}
-        ${contact?.linkedin ? `<li>LinkedIn: <a href="${escapeAttr(contact.linkedin)}">${escapeHtml(contact.linkedin)}</a></li>` : ""}
-        ${contact?.location ? `<li>Location: ${escapeHtml(contact.location)}</li>` : ""}
-      </ul>
-    </section>
-  `;
-}
-
-function renderSummary(container, summary) {
-  container.innerHTML = `
-    <section>
-      <h2>Summary</h2>
-      ${renderParagraphs(summary)}
-    </section>
-  `;
-}
-
-function renderKeySkills(container, keySkills) {
-  if (!keySkills || typeof keySkills !== "object") {
-    container.innerHTML = `
-      <section>
-        <h2>Key Skills</h2>
-      </section>
-    `;
+function renderContact(container, contactBlock) {
+  if (!container) {
     return;
   }
 
-  const categories = Object.entries(keySkills)
-    .map(([category, value]) => renderSkillCategory(category, value))
+  const labels = contactBlock?.labels || {};
+  const entries = Object.entries(contactBlock || {})
+    .filter(([key]) => key !== "title" && key !== "labels")
+    .map(([key, value]) => {
+      const label = labels[key] || key;
+      if (key === "email") {
+        return `<li><strong>${escapeHtml(label)}:</strong> <a href="mailto:${escapeAttr(value)}">${escapeHtml(value)}</a></li>`;
+      }
+      if (key === "linkedin") {
+        return `<li><strong>${escapeHtml(label)}:</strong> <a href="${escapeAttr(value)}">${escapeHtml(value)}</a></li>`;
+      }
+      return `<li><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</li>`;
+    })
     .join("");
 
   container.innerHTML = `
     <section>
-      <h2>Key Skills</h2>
+      <h2>${escapeHtml(contactBlock?.title || "contact")}</h2>
+      <ul>${entries}</ul>
+    </section>
+  `;
+}
+
+function renderTextBlock(container, block) {
+  if (!container) {
+    return;
+  }
+
+  const title = block?.title || "";
+  const paragraphs = splitIntoParagraphs(block?.text)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+
+  container.innerHTML = `
+    <section>
+      <h2>${escapeHtml(title)}</h2>
+      ${paragraphs}
+    </section>
+  `;
+}
+
+function renderListBlock(container, block) {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = `
+    <section>
+      <h2>${escapeHtml(block?.title || "")}</h2>
+      ${renderList(block?.items)}
+    </section>
+  `;
+}
+
+function renderKeySkills(container, block) {
+  if (!container) {
+    return;
+  }
+
+  const categories = Object.values(block?.categories || {})
+    .map((category) => {
+      if (category?.categories) {
+        const lines = Object.values(category.categories)
+          .map((toolCategory) => {
+            const items = Array.isArray(toolCategory?.items)
+              ? toolCategory.items.join(", ")
+              : "";
+            return `<li><strong>${escapeHtml(toolCategory?.title || "")}:</strong> ${escapeHtml(items)}</li>`;
+          })
+          .join("");
+
+        return `
+          <section>
+            <h3>${escapeHtml(category?.title || "")}</h3>
+            <ul>${lines}</ul>
+          </section>
+        `;
+      }
+
+      return `
+        <section>
+          <h3>${escapeHtml(category?.title || "")}</h3>
+          ${renderList(category?.items)}
+        </section>
+      `;
+    })
+    .join("");
+
+  container.innerHTML = `
+    <section>
+      <h2>${escapeHtml(block?.title || "")}</h2>
       ${categories}
     </section>
   `;
 }
 
-function renderSkillCategory(name, value) {
-  if (name === "Tools & Technologies" && value && typeof value === "object") {
-    const lines = Object.entries(value)
-      .map(([subName, subItems]) => {
-        const itemLine = Array.isArray(subItems) ? subItems.join(", ") : "";
-        const isPrioritySubcategory =
-          subName === "Tasks & defect tracking" || subName === "Test management";
-        const label = isPrioritySubcategory
-          ? `<strong>${escapeHtml(subName)}:</strong>`
-          : `${escapeHtml(subName)}:`;
-        return `<li>${label} ${escapeHtml(itemLine)}</li>`;
-      })
-      .join("");
-
-    return `
-      <section>
-        <h3>${escapeHtml(name)}</h3>
-        <ul>${lines}</ul>
-      </section>
-    `;
+function renderExperience(container, block) {
+  if (!container) {
+    return;
   }
 
-  if (Array.isArray(value)) {
-    return `
-      <section>
-        <h3>${escapeHtml(name)}</h3>
-        ${renderList(value)}
-      </section>
-    `;
-  }
-
-  if (value && typeof value === "object") {
-    const nested = Object.entries(value)
-      .map(([subName, subValue]) => {
-        if (Array.isArray(subValue)) {
-          return `
-            <li>
-              <h4>${escapeHtml(subName)}</h4>
-              ${renderList(subValue)}
-            </li>
-          `;
-        }
-
-        return `
-          <li>
-            <h4>${escapeHtml(subName)}</h4>
-            ${renderObjectAsList(subValue)}
-          </li>
-        `;
-      })
-      .join("");
-
-    return `
-      <section>
-        <h3>${escapeHtml(name)}</h3>
-        <ul>${nested}</ul>
-      </section>
-    `;
-  }
-
-  return `
-    <section>
-      <h3>${escapeHtml(name)}</h3>
-      <p>${escapeHtml(value ?? "")}</p>
-    </section>
-  `;
-}
-
-function renderObjectAsList(value) {
-  if (!value || typeof value !== "object") {
-    return "";
-  }
-
-  const items = Object.entries(value)
-    .map(([name, nestedValue]) => {
-      if (Array.isArray(nestedValue)) {
-        return `
-          <li>
-            <h5>${escapeHtml(name)}</h5>
-            ${renderList(nestedValue)}
-          </li>
-        `;
-      }
-
-      return `
-        <li>
-          <h5>${escapeHtml(name)}</h5>
-          ${renderObjectAsList(nestedValue)}
-        </li>
-      `;
-    })
-    .join("");
-
-  return `<ul>${items}</ul>`;
-}
-
-function renderExperience(container, items = []) {
-  const articles = items
+  const labels = block?.labels || {};
+  const articles = (block?.items || [])
     .map((item) => {
-      const responsibilities = renderGroupedOrFlatList("Responsibilities", item.responsibilities);
-      const achievements = renderGroupedOrFlatList("Achievements", item.achievements);
+      const position = item?.position
+        ? `<p><strong>${escapeHtml(labels.position || "position")}:</strong> ${escapeHtml(item.position)}</p>`
+        : "";
+
+      const companyParts = [];
+      if (item?.company) {
+        companyParts.push(
+          item.companyType ? `${item.company} (${item.companyType})` : item.company
+        );
+      }
+      if (item?.period) {
+        companyParts.push(item.period);
+      }
+      const company = companyParts.length
+        ? `<p><strong>${escapeHtml(labels.company || "company")}:</strong> ${escapeHtml(companyParts.join(", "))}</p>`
+        : "";
+
+      const projects = item?.projects
+        ? `<p><strong>${escapeHtml(labels.projects || "projects")}:</strong> ${escapeHtml(item.projects)}</p>`
+        : "";
+      const stack = item?.stack
+        ? `<p><strong>${escapeHtml(labels.stack || "stack")}:</strong> ${escapeHtml(item.stack)}</p>`
+        : "";
+
+      const responsibilities = renderExpGroup(
+        labels.responsibilities || "responsibilities",
+        item?.responsibilities,
+        labels
+      );
+      const achievements = renderExpGroup(
+        labels.achievements || "achievements",
+        item?.achievements,
+        labels
+      );
 
       return `
         <article>
-          <p>${escapeHtml(item.position || "")}</p>
-          <p>${escapeHtml(item.company || "")} (${escapeHtml(item.companyType || "")}), ${escapeHtml(item.period || "")}</p>
-          ${item.projects ? `<p>Projects: ${escapeHtml(item.projects)}</p>` : ""}
-          ${item.stack ? `<p>Stack: ${escapeHtml(item.stack)}</p>` : ""}
+          ${position}
+          ${company}
+          ${projects}
+          ${stack}
           ${responsibilities}
           ${achievements}
         </article>
@@ -243,39 +232,39 @@ function renderExperience(container, items = []) {
 
   container.innerHTML = `
     <section>
-      <h2>Professional Experience</h2>
+      <h2>${escapeHtml(block?.title || "")}</h2>
       ${articles}
     </section>
   `;
 }
 
-function renderGroupedOrFlatList(title, groups) {
-  if (!groups || typeof groups !== "object") {
+function renderExpGroup(title, group, labels) {
+  if (!group || typeof group !== "object") {
     return "";
   }
 
-  const projectRelated = groups["Project-related"];
-  const nonProjectRelated = groups["Non-project-related"];
-  const hasProjectRelated = Array.isArray(projectRelated) && projectRelated.length > 0;
-  const hasNonProjectRelated = Array.isArray(nonProjectRelated) && nonProjectRelated.length > 0;
+  const projectRelated = Array.isArray(group.projectRelated) ? group.projectRelated : [];
+  const nonProjectRelated = Array.isArray(group.nonProjectRelated)
+    ? group.nonProjectRelated
+    : [];
 
-  if (hasProjectRelated && hasNonProjectRelated) {
+  if (projectRelated.length && nonProjectRelated.length) {
     return `
       <section>
         <h4>${escapeHtml(title)}</h4>
         <section>
-          <h5>Project-related</h5>
+          <h5>${escapeHtml(labels.projectRelated || "projectRelated")}</h5>
           ${renderList(projectRelated)}
         </section>
         <section>
-          <h5>Non-project-related</h5>
+          <h5>${escapeHtml(labels.nonProjectRelated || "nonProjectRelated")}</h5>
           ${renderList(nonProjectRelated)}
         </section>
       </section>
     `;
   }
 
-  const flatItems = hasProjectRelated ? projectRelated : hasNonProjectRelated ? nonProjectRelated : [];
+  const flatItems = [...projectRelated, ...nonProjectRelated];
   if (!flatItems.length) {
     return "";
   }
@@ -288,46 +277,6 @@ function renderGroupedOrFlatList(title, groups) {
   `;
 }
 
-function renderEducation(container, items = []) {
-  container.innerHTML = `
-    <section>
-      <h2>Education</h2>
-      ${renderList(items)}
-    </section>
-  `;
-}
-
-function renderLanguages(container, items = []) {
-  container.innerHTML = `
-    <section>
-      <h2>Languages</h2>
-      ${renderList(items)}
-    </section>
-  `;
-}
-
-function renderAbout(container, about) {
-  container.innerHTML = `
-    <section>
-      <h2>About</h2>
-      ${renderParagraphs(about)}
-    </section>
-  `;
-}
-
-function renderPreferences(container, text) {
-  const paragraphs = splitIntoParagraphs(text)
-    .map((line) => `<p>${escapeHtml(line)}</p>`)
-    .join("");
-
-  container.innerHTML = `
-    <section>
-      <h2>Work Preferences</h2>
-      ${paragraphs}
-    </section>
-  `;
-}
-
 function renderList(items = []) {
   if (!Array.isArray(items)) {
     return "";
@@ -336,26 +285,17 @@ function renderList(items = []) {
   return `<ul>${listItems}</ul>`;
 }
 
-function renderParagraphs(text) {
-  if (!text) {
-    return "";
-  }
-  return text
-    .split("\n\n")
-    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
-    .join("");
-}
-
 function splitIntoParagraphs(text) {
-  if (!text) {
+  const value = typeof text === "string" ? text : "";
+  if (!value) {
     return [];
   }
 
-  if (text.includes("\n")) {
-    return text.split(/\r?\n+/).filter((line) => line.trim().length > 0);
+  if (value.includes("\n")) {
+    return value.split(/\r?\n+/).filter((line) => line.trim().length > 0);
   }
 
-  return text.split(/(?<=[.!?])\s+/).filter((line) => line.trim().length > 0);
+  return value.split(/(?<=[.!?])\s+/).filter((line) => line.trim().length > 0);
 }
 
 function escapeHtml(value) {
