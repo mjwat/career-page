@@ -190,18 +190,25 @@ function renderExperience(container, block) {
   const articles = (block?.items || [])
     .map((item, index) => {
       const jobId = `experience-job-${index}`;
-      const companyParts = [];
-      if (item?.company) {
-        companyParts.push(
-          item.companyType ? `${item.company} (${item.companyType})` : item.company
-        );
+      const headerParts = [];
+      if (item?.position) {
+        headerParts.push(item.position);
       }
       if (item?.period) {
-        companyParts.push(item.period);
+        headerParts.push(item.period);
       }
-      const headerPosition = item?.position ? escapeHtml(item.position) : "";
-      const headerCompany = companyParts.length ? escapeHtml(companyParts.join(", ")) : "";
-      const header = `<h3>${headerPosition}<br>${headerCompany}</h3>`;
+      const header = `<h3>${escapeHtml(headerParts.join(", "))}</h3>`;
+
+      const companyParts = [];
+      if (item?.company) {
+        companyParts.push(item.company);
+      }
+      if (item?.companyType) {
+        companyParts.push(`(${item.companyType})`);
+      }
+      const company = companyParts.length
+        ? `<p><strong>${escapeHtml(labels.company || "company")}:</strong> ${escapeHtml(companyParts.join(" "))}</p>`
+        : "";
 
       const projects = item?.projects
         ? `<p><strong>${escapeHtml(labels.projects || "projects")}:</strong> ${escapeHtml(item.projects)}</p>`
@@ -231,6 +238,7 @@ function renderExperience(container, block) {
           </div>
           <div class="accordion-content">
             <div class="experience-content">
+              ${company}
               ${projects}
               ${stack}
               ${responsibilities}
