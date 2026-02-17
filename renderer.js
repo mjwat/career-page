@@ -52,6 +52,10 @@ function renderCv(data) {
   renderListBlock(document.getElementById("languages"), data.languages);
   renderTextBlock(document.getElementById("about"), data.about);
   renderTextBlock(document.getElementById("preferences"), data.workPreferences);
+
+  if (typeof window.initAccordion === "function") {
+    window.initAccordion();
+  }
 }
 
 function renderProfile(container, profile) {
@@ -137,8 +141,9 @@ function renderKeySkills(container, block) {
     return;
   }
 
-  const categories = Object.values(block?.categories || {})
-    .map((category) => {
+  const categories = Object.entries(block?.categories || {})
+    .map(([categoryKey, category]) => {
+      const accordionId = `keyskills-${categoryKey}`;
       if (category?.categories) {
         const lines = Object.values(category.categories)
           .map((toolCategory) => {
@@ -150,17 +155,27 @@ function renderKeySkills(container, block) {
           .join("");
 
         return `
-          <section>
-            <h3>${escapeHtml(category?.title || "")}</h3>
-            <ul>${lines}</ul>
+          <section class="accordion-item" data-id="${escapeAttr(accordionId)}">
+            <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+              <h3>${escapeHtml(category?.title || "")}</h3>
+              <span class="accordion-icon" aria-hidden="true">+</span>
+            </div>
+            <div class="accordion-content">
+              <ul>${lines}</ul>
+            </div>
           </section>
         `;
       }
 
       return `
-        <section>
-          <h3>${escapeHtml(category?.title || "")}</h3>
-          ${renderList(category?.items)}
+        <section class="accordion-item" data-id="${escapeAttr(accordionId)}">
+          <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+            <h3>${escapeHtml(category?.title || "")}</h3>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </div>
+          <div class="accordion-content">
+            ${renderList(category?.items)}
+          </div>
         </section>
       `;
     })

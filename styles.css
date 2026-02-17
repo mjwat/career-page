@@ -1,0 +1,22 @@
+.accordion-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-header:focus {
+  outline: 2px solid #666;
+  outline-offset: 2px;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.accordion-icon {
+  min-width: 1ch;
+  text-align: center;
+}
