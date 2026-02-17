@@ -155,7 +155,9 @@ function renderKeySkills(container, block) {
               <span class="accordion-icon" aria-hidden="true">+</span>
             </div>
             <div class="accordion-content">
-              <ul>${lines}</ul>
+              <div class="accordion-content-inner">
+                <ul>${lines}</ul>
+              </div>
             </div>
           </article>
         `;
@@ -168,7 +170,9 @@ function renderKeySkills(container, block) {
             <span class="accordion-icon" aria-hidden="true">+</span>
           </div>
           <div class="accordion-content">
-            ${renderList(category?.items)}
+            <div class="accordion-content-inner">
+              ${renderList(category?.items)}
+            </div>
           </div>
         </article>
       `;
@@ -236,7 +240,7 @@ function renderExperience(container, block) {
             ${header}
             <span class="accordion-icon" aria-hidden="true">+</span>
           </div>
-          <div class="accordion-content">
+          <div class="accordion-content accordion-content-level-1">
             <div class="experience-content">
               ${company}
               ${projects}
@@ -284,7 +288,7 @@ function renderExpGroupAccordion(title, group, labels, baseId) {
           <h5>${escapeHtml(labels.projectRelated || "projectRelated")}</h5>
           <span class="accordion-icon" aria-hidden="true">+</span>
         </div>
-        <div class="accordion-content">
+        <div class="accordion-content accordion-content-level-3">
           ${renderList(projectRelated)}
         </div>
       </section>
@@ -293,7 +297,7 @@ function renderExpGroupAccordion(title, group, labels, baseId) {
           <h5>${escapeHtml(labels.nonProjectRelated || "nonProjectRelated")}</h5>
           <span class="accordion-icon" aria-hidden="true">+</span>
         </div>
-        <div class="accordion-content">
+        <div class="accordion-content accordion-content-level-3">
           ${renderList(nonProjectRelated)}
         </div>
       </section>
@@ -308,7 +312,7 @@ function renderExpGroupAccordion(title, group, labels, baseId) {
         <h4>${escapeHtml(title)}</h4>
         <span class="accordion-icon" aria-hidden="true">+</span>
       </div>
-      <div class="accordion-content">
+      <div class="accordion-content accordion-content-level-2">
         ${nestedContent}
       </div>
     </section>

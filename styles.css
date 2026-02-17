@@ -9,7 +9,7 @@
 }
 
 .accordion-header h3 {
-  margin: 0;
+    margin: 0.2rem;
 }
 
 .accordion-header:focus,
@@ -27,6 +27,38 @@
   transition: max-height 0.25s ease;
 }
 
+.accordion-level-1 > .accordion-content {
+  padding-left: 20px;
+  border-left: 1px solid #e3e3e3;
+  margin-left: 2px;
+}
+
+#experience .accordion-level-2 > .accordion-content {
+  padding-left: 20px;
+  border-left: 1px solid #e3e3e3;
+  margin-left: 4px;
+}
+
+#experience .accordion-level-3 > .accordion-content {
+  padding-left: 20px;
+  border-left: 1px solid #efefef;
+  margin-left: 8px;
+}
+
+#experience .accordion-item h4,
+#experience .accordion-item h5 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#keySkills .accordion-content-inner {
+  padding-left: 20px;
+}
+
+#keySkills .accordion-item[data-expanded="true"] > .accordion-content > .accordion-content-inner {
+  border-left: 1px solid #e3e3e3;
+}
+
 .accordion-icon {
   order: -1;
   min-width: 1ch;
@@ -38,6 +70,12 @@ button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px #666;
   border-radius: 4px;
+}
+
+ul {
+    padding-left: 15px;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
 }
 
 [data-lang][data-active="true"] {
