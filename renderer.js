@@ -91,17 +91,15 @@ function renderContact(container, contactBlock) {
         return `<li><strong>${escapeHtml(label)}:</strong> <a href="mailto:${escapeAttr(value)}">${escapeHtml(value)}</a></li>`;
       }
       if (key === "linkedin") {
-        return `<li><strong>${escapeHtml(label)}:</strong> <a href="${escapeAttr(value)}">${escapeHtml(value)}</a></li>`;
+        return `<li><strong>${escapeHtml(label)}:</strong> <a href="${escapeAttr(value)}" target="_blank" rel="noopener noreferrer">${escapeHtml(value)}</a></li>`;
       }
       return `<li><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</li>`;
     })
     .join("");
 
   container.innerHTML = `
-    <section>
-      <h2>${escapeHtml(contactBlock?.title || "contact")}</h2>
-      <ul>${entries}</ul>
-    </section>
+    <h2>${escapeHtml(contactBlock?.title || "contact")}</h2>
+    <ul>${entries}</ul>
   `;
 }
 
@@ -116,10 +114,8 @@ function renderTextBlock(container, block) {
     .join("");
 
   container.innerHTML = `
-    <section>
-      <h2>${escapeHtml(title)}</h2>
-      ${paragraphs}
-    </section>
+    <h2>${escapeHtml(title)}</h2>
+    ${paragraphs}
   `;
 }
 
@@ -129,10 +125,8 @@ function renderListBlock(container, block) {
   }
 
   container.innerHTML = `
-    <section>
-      <h2>${escapeHtml(block?.title || "")}</h2>
-      ${renderList(block?.items)}
-    </section>
+    <h2>${escapeHtml(block?.title || "")}</h2>
+    ${renderList(block?.items)}
   `;
 }
 
@@ -155,7 +149,7 @@ function renderKeySkills(container, block) {
           .join("");
 
         return `
-          <section class="accordion-item" data-id="${escapeAttr(accordionId)}">
+          <article class="accordion-item" data-id="${escapeAttr(accordionId)}">
             <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
               <h3>${escapeHtml(category?.title || "")}</h3>
               <span class="accordion-icon" aria-hidden="true">+</span>
@@ -163,12 +157,12 @@ function renderKeySkills(container, block) {
             <div class="accordion-content">
               <ul>${lines}</ul>
             </div>
-          </section>
+          </article>
         `;
       }
 
       return `
-        <section class="accordion-item" data-id="${escapeAttr(accordionId)}">
+        <article class="accordion-item" data-id="${escapeAttr(accordionId)}">
           <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
             <h3>${escapeHtml(category?.title || "")}</h3>
             <span class="accordion-icon" aria-hidden="true">+</span>
@@ -176,16 +170,14 @@ function renderKeySkills(container, block) {
           <div class="accordion-content">
             ${renderList(category?.items)}
           </div>
-        </section>
+        </article>
       `;
     })
     .join("");
 
   container.innerHTML = `
-    <section>
-      <h2>${escapeHtml(block?.title || "")}</h2>
-      ${categories}
-    </section>
+    <h2>${escapeHtml(block?.title || "")}</h2>
+    ${categories}
   `;
 }
 
@@ -243,10 +235,8 @@ function renderExperience(container, block) {
     .join("");
 
   container.innerHTML = `
-    <section>
-      <h2>${escapeHtml(block?.title || "")}</h2>
-      ${articles}
-    </section>
+    <h2>${escapeHtml(block?.title || "")}</h2>
+    ${articles}
   `;
 }
 
@@ -262,17 +252,17 @@ function renderExpGroup(title, group, labels) {
 
   if (projectRelated.length && nonProjectRelated.length) {
     return `
-      <section>
+      <div>
         <h4>${escapeHtml(title)}</h4>
-        <section>
+        <div>
           <h5>${escapeHtml(labels.projectRelated || "projectRelated")}</h5>
           ${renderList(projectRelated)}
-        </section>
-        <section>
+        </div>
+        <div>
           <h5>${escapeHtml(labels.nonProjectRelated || "nonProjectRelated")}</h5>
           ${renderList(nonProjectRelated)}
-        </section>
-      </section>
+        </div>
+      </div>
     `;
   }
 
@@ -282,10 +272,10 @@ function renderExpGroup(title, group, labels) {
   }
 
   return `
-    <section>
+    <div>
       <h4>${escapeHtml(title)}</h4>
       ${renderList(flatItems)}
-    </section>
+    </div>
   `;
 }
 
