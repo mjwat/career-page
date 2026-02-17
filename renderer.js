@@ -188,7 +188,8 @@ function renderExperience(container, block) {
 
   const labels = block?.labels || {};
   const articles = (block?.items || [])
-    .map((item) => {
+    .map((item, index) => {
+      const jobId = `experience-job-${index}`;
       const companyParts = [];
       if (item?.company) {
         companyParts.push(
@@ -209,25 +210,32 @@ function renderExperience(container, block) {
         ? `<p><strong>${escapeHtml(labels.stack || "stack")}:</strong> ${escapeHtml(item.stack)}</p>`
         : "";
 
-      const responsibilities = renderExpGroup(
+      const responsibilities = renderExpGroupAccordion(
         labels.responsibilities || "responsibilities",
         item?.responsibilities,
-        labels
+        labels,
+        `${jobId}-responsibilities`
       );
-      const achievements = renderExpGroup(
+      const achievements = renderExpGroupAccordion(
         labels.achievements || "achievements",
         item?.achievements,
-        labels
+        labels,
+        `${jobId}-achievements`
       );
 
       return `
-        <article class="experience-item">
-          ${header}
-          <div class="experience-content">
-            ${projects}
-            ${stack}
-            ${responsibilities}
-            ${achievements}
+        <article class="experience-item accordion-item accordion-level-1" data-id="${escapeAttr(jobId)}">
+          <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+            ${header}
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </div>
+          <div class="accordion-content">
+            <div class="experience-content">
+              ${projects}
+              ${stack}
+              ${responsibilities}
+              ${achievements}
+            </div>
           </div>
         </article>
       `;
@@ -236,11 +244,13 @@ function renderExperience(container, block) {
 
   container.innerHTML = `
     <h2>${escapeHtml(block?.title || "")}</h2>
-    ${articles}
+    <section class="experience-list">
+      ${articles}
+    </section>
   `;
 }
 
-function renderExpGroup(title, group, labels) {
+function renderExpGroupAccordion(title, group, labels, baseId) {
   if (!group || typeof group !== "object") {
     return "";
   }
@@ -250,32 +260,50 @@ function renderExpGroup(title, group, labels) {
     ? group.nonProjectRelated
     : [];
 
-  if (projectRelated.length && nonProjectRelated.length) {
-    return `
-      <div>
-        <h4>${escapeHtml(title)}</h4>
-        <div>
-          <h5>${escapeHtml(labels.projectRelated || "projectRelated")}</h5>
-          ${renderList(projectRelated)}
-        </div>
-        <div>
-          <h5>${escapeHtml(labels.nonProjectRelated || "nonProjectRelated")}</h5>
-          ${renderList(nonProjectRelated)}
-        </div>
-      </div>
-    `;
-  }
+  const hasProjectRelated = projectRelated.length > 0;
+  const hasNonProjectRelated = nonProjectRelated.length > 0;
+  const hasBothGroupedSections = hasProjectRelated && hasNonProjectRelated;
 
-  const flatItems = [...projectRelated, ...nonProjectRelated];
-  if (!flatItems.length) {
+  if (!hasProjectRelated && !hasNonProjectRelated) {
     return "";
   }
 
+  let nestedContent = "";
+  if (hasBothGroupedSections) {
+    nestedContent = `
+      <section class="accordion-item accordion-level-3" data-id="${escapeAttr(`${baseId}-project-related`)}">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <h5>${escapeHtml(labels.projectRelated || "projectRelated")}</h5>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="accordion-content">
+          ${renderList(projectRelated)}
+        </div>
+      </section>
+      <section class="accordion-item accordion-level-3" data-id="${escapeAttr(`${baseId}-non-project-related`)}">
+        <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <h5>${escapeHtml(labels.nonProjectRelated || "nonProjectRelated")}</h5>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </div>
+        <div class="accordion-content">
+          ${renderList(nonProjectRelated)}
+        </div>
+      </section>
+    `;
+  } else {
+    nestedContent = renderList([...projectRelated, ...nonProjectRelated]);
+  }
+
   return `
-    <div>
-      <h4>${escapeHtml(title)}</h4>
-      ${renderList(flatItems)}
-    </div>
+    <section class="accordion-item accordion-level-2" data-id="${escapeAttr(baseId)}">
+      <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+        <h4>${escapeHtml(title)}</h4>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </div>
+      <div class="accordion-content">
+        ${nestedContent}
+      </div>
+    </section>
   `;
 }
 

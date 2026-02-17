@@ -15,10 +15,66 @@
     localStorage.setItem(ACCORDION_STATE_KEY, JSON.stringify(state));
   }
 
-  function setItemState(item, expanded) {
-    const header = item.querySelector(".accordion-header");
-    const content = item.querySelector(".accordion-content");
-    const icon = item.querySelector(".accordion-icon");
+  function getDirectHeader(item) {
+    return Array.from(item.children).find((el) =>
+      el.classList.contains("accordion-header")
+    );
+  }
+
+  function getDirectContent(item) {
+    return Array.from(item.children).find((el) =>
+      el.classList.contains("accordion-content")
+    );
+  }
+
+  function recalculateAncestorHeights(fromItem) {
+    let parentItem = fromItem.parentElement
+      ? fromItem.parentElement.closest(".accordion-item")
+      : null;
+
+    while (parentItem) {
+      const parentContent = getDirectContent(parentItem);
+      if (!parentContent) {
+        break;
+      }
+
+      const isExpanded = parentItem.getAttribute("data-expanded") === "true";
+      if (isExpanded) {
+        if (parentContent.style.maxHeight !== "none") {
+          parentContent.style.maxHeight = `${parentContent.scrollHeight}px`;
+        }
+      }
+
+      parentItem = parentItem.parentElement
+        ? parentItem.parentElement.closest(".accordion-item")
+        : null;
+    }
+  }
+
+  function bindContentLifecycle(item, content) {
+    if (content.dataset.accordionBound === "true") {
+      return;
+    }
+
+    content.addEventListener("transitionend", (event) => {
+      if (event.propertyName !== "max-height") {
+        return;
+      }
+
+      const isExpanded = item.getAttribute("data-expanded") === "true";
+      if (isExpanded) {
+        // Keep expanded panels unconstrained so nested changes never clip content.
+        content.style.maxHeight = "none";
+      }
+    });
+
+    content.dataset.accordionBound = "true";
+  }
+
+  function setExpanded(item, expanded) {
+    const header = getDirectHeader(item);
+    const content = getDirectContent(item);
+    const icon = header ? header.querySelector(".accordion-icon") : null;
 
     if (!header || !content || !icon) {
       return;
@@ -27,12 +83,35 @@
     item.setAttribute("data-expanded", expanded ? "true" : "false");
     header.setAttribute("aria-expanded", expanded ? "true" : "false");
     icon.textContent = expanded ? "−" : "+";
+    bindContentLifecycle(item, content);
 
     if (expanded) {
+      if (content.style.maxHeight === "none") {
+        return;
+      }
       content.style.maxHeight = `${content.scrollHeight}px`;
     } else {
+      // If expanded panel was unconstrained, measure first to animate close smoothly.
+      if (content.style.maxHeight === "none") {
+        content.style.maxHeight = `${content.scrollHeight}px`;
+        void content.offsetHeight;
+      }
       content.style.maxHeight = "0px";
     }
+
+    recalculateAncestorHeights(item);
+  }
+
+  function recalculateAllExpandedHeights() {
+    const expandedItems = document.querySelectorAll(
+      ".accordion-item[data-expanded='true']"
+    );
+    expandedItems.forEach((item) => {
+      const content = getDirectContent(item);
+      if (content) {
+        content.style.maxHeight = "none";
+      }
+    });
   }
 
   function toggleItem(item, state) {
@@ -40,10 +119,12 @@
     if (!id) {
       return;
     }
+
     const isExpanded = item.getAttribute("data-expanded") === "true";
-    const next = !isExpanded;
-    setItemState(item, next);
-    state[id] = next;
+    const nextExpanded = !isExpanded;
+
+    setExpanded(item, nextExpanded);
+    state[id] = nextExpanded;
     writeState(state);
   }
 
@@ -53,16 +134,15 @@
 
     items.forEach((item) => {
       const id = item.getAttribute("data-id");
-      const header = item.querySelector(".accordion-header");
-      const content = item.querySelector(".accordion-content");
+      const header = getDirectHeader(item);
+      const content = getDirectContent(item);
 
       if (!id || !header || !content) {
         return;
       }
 
       content.style.maxHeight = "0px";
-      const expanded = state[id] === true;
-      setItemState(item, expanded);
+      setExpanded(item, state[id] === true);
 
       header.addEventListener("click", () => {
         toggleItem(item, state);
@@ -75,5 +155,11 @@
         }
       });
     });
+
+    requestAnimationFrame(recalculateAllExpandedHeights);
   };
+
+  window.addEventListener("resize", () => {
+    recalculateAllExpandedHeights();
+  });
 })();
