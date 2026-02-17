@@ -182,10 +182,6 @@ function renderExperience(container, block) {
   const labels = block?.labels || {};
   const articles = (block?.items || [])
     .map((item) => {
-      const position = item?.position
-        ? `<p>${escapeHtml(item.position)}</p>`
-        : "";
-
       const companyParts = [];
       if (item?.company) {
         companyParts.push(
@@ -195,9 +191,9 @@ function renderExperience(container, block) {
       if (item?.period) {
         companyParts.push(item.period);
       }
-      const company = companyParts.length
-        ? `<p>${escapeHtml(companyParts.join(", "))}</p>`
-        : "";
+      const headerPosition = item?.position ? escapeHtml(item.position) : "";
+      const headerCompany = companyParts.length ? escapeHtml(companyParts.join(", ")) : "";
+      const header = `<h3>${headerPosition}<br>${headerCompany}</h3>`;
 
       const projects = item?.projects
         ? `<p><strong>${escapeHtml(labels.projects || "projects")}:</strong> ${escapeHtml(item.projects)}</p>`
@@ -218,13 +214,14 @@ function renderExperience(container, block) {
       );
 
       return `
-        <article>
-          ${position}
-          ${company}
-          ${projects}
-          ${stack}
-          ${responsibilities}
-          ${achievements}
+        <article class="experience-item">
+          ${header}
+          <div class="experience-content">
+            ${projects}
+            ${stack}
+            ${responsibilities}
+            ${achievements}
+          </div>
         </article>
       `;
     })
