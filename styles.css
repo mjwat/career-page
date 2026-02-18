@@ -47,7 +47,7 @@ body {
     gap: 0.5rem;
 }
 
-.site-header nav [data-lang] {
+.glass-button {
     border: 1px solid rgba(255, 255, 255, 0.45);
     background: rgba(255, 255, 255, 0.28);
     -webkit-backdrop-filter: blur(8px);
@@ -59,7 +59,7 @@ body {
         box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.site-header nav [data-lang][data-active="false"]:hover {
+.glass-button:hover {
     background: rgba(255, 255, 255, 0.4);
     border-color: rgba(41, 92, 76, 0.35);
     transform: translateY(-1px);
@@ -84,6 +84,12 @@ body {
 
 main#app {
     padding: 1rem 20%;
+}
+
+.page-footer {
+    padding: 0.5rem 20% 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 h1, h2, h3, h4, h5 {
@@ -173,8 +179,13 @@ a:focus-visible {
 button:focus,
 button:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #666;
-    border-radius: 4px;
+    box-shadow: none;
+}
+
+button:hover,
+button:active {
+    outline: none;
+    box-shadow: none;
 }
 
 ul {
@@ -206,6 +217,17 @@ li {
     opacity: 1;
 }
 
+#scroll-top {
+    position: static;
+    min-width: 2.4rem;
+    min-height: 2.4rem;
+    padding: 0.35rem 0.8rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-color: rgba(41, 92, 76, 0.4);
+    box-shadow: 0 6px 14px rgba(23, 56, 44, 0.12);
+}
+
 @media (max-width: 768px) {
     .site-header {
         padding-left: 5%;
@@ -213,6 +235,11 @@ li {
     }
 
     main#app {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .page-footer {
         padding-left: 5%;
         padding-right: 5%;
     }
