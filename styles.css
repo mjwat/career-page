@@ -1,28 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap");
+
+:root {
+    --text-primary: #002211;
+    --heading-h1: #233c32;
+    --heading-h2: #244a39;
+    --heading-h3: #295c4c;
+    --heading-h4: #1f5243;
+    --heading-h5: #2a655f;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #f8fbff 0%, #fafffc 100%);
+    color: var(--text-primary);
+    font-family: "Fira Code", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+    line-height: 1.45;
+}
+
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #fff;
-  padding: 0.75rem 0rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 6px 20px rgba(31, 64, 96, 0.08);
+    padding: 0.75rem 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
 }
 
 .site-header nav {
-  display: flex;
-  gap: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
-.site-header h1 {
-  margin: 0;
+#profile-name {
+    min-width: 0;
+}
+
+#profile-name h1 {
+    margin: 0;
+}
+
+#profile-role {
+    width: 100%;
+    text-align: left;
+}
+
+#profile-role p {
+    margin: 0.25rem 0 0;
+}
+
+main#app {
+    padding: 1rem 20%;
+}
+
+h1 {
+    color: var(--heading-h1);
+}
+
+h2 {
+    color: var(--heading-h2);
+}
+
+h3 {
+    color: var(--heading-h3);
+}
+
+h4 {
+    color: var(--heading-h4);
+}
+
+h5 {
+    color: var(--heading-h5);
 }
 
 .accordion-header {
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.5rem;
-  outline: none;
-  transition: color 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    outline: none;
+    transition: color 0.2s ease;
 }
 
 .accordion-header h3 {
@@ -31,62 +107,62 @@
 
 .accordion-header:focus,
 .accordion-header:focus-visible {
-  outline: none;
+    outline: none;
 }
 
 .accordion-header:active {
-  color: #666;
+    color: #666;
 }
 
 .accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.25s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
 }
 
-.accordion-level-1 > .accordion-content {
-  padding-left: 20px;
-  border-left: 1px solid #e3e3e3;
-  margin-left: 2px;
+.accordion-level-1>.accordion-content {
+    padding-left: 20px;
+    border-left: 1px solid #e3e3e3;
+    margin-left: 2px;
 }
 
-#experience .accordion-level-2 > .accordion-content {
-  padding-left: 20px;
-  border-left: 1px solid #e3e3e3;
-  margin-left: 4px;
+#experience .accordion-level-2>.accordion-content {
+    padding-left: 20px;
+    border-left: 1px solid #e3e3e3;
+    margin-left: 4px;
 }
 
-#experience .accordion-level-3 > .accordion-content {
-  padding-left: 20px;
-  border-left: 1px solid #efefef;
-  margin-left: 8px;
+#experience .accordion-level-3>.accordion-content {
+    padding-left: 20px;
+    border-left: 1px solid #efefef;
+    margin-left: 8px;
 }
 
 #experience .accordion-item h4,
 #experience .accordion-item h5 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 #keySkills .accordion-content-inner {
-  padding-left: 20px;
+    padding-left: 20px;
 }
 
-#keySkills .accordion-item[data-expanded="true"] > .accordion-content > .accordion-content-inner {
-  border-left: 1px solid #e3e3e3;
+#keySkills .accordion-item[data-expanded="true"]>.accordion-content>.accordion-content-inner {
+    border-left: 1px solid #e3e3e3;
 }
 
 .accordion-icon {
-  order: -1;
-  min-width: 1ch;
-  text-align: center;
+    order: -1;
+    min-width: 1ch;
+    text-align: center;
 }
 
 button:focus,
 button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #666;
-  border-radius: 4px;
+    outline: none;
+    box-shadow: 0 0 0 2px #666;
+    border-radius: 4px;
 }
 
 ul {
@@ -96,14 +172,26 @@ ul {
 }
 
 [data-lang][data-active="true"] {
-  font-weight: 700;
-  cursor: default;
+    font-weight: 700;
+    cursor: default;
 }
 
 [data-lang][data-active="false"] {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 [data-lang][data-active="true"]:disabled {
-  opacity: 1;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .site-header {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    main#app {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
 }

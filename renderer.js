@@ -40,7 +40,11 @@ async function fetchLanguageData(language) {
 }
 
 function renderCv(data) {
-  renderProfile(document.getElementById("profile"), data.profile);
+  renderProfile(
+    document.getElementById("profile-name"),
+    document.getElementById("profile-role"),
+    data.profile
+  );
   renderContact(document.getElementById("contact"), data.contact);
   renderTextBlock(document.getElementById("summary"), data.summary);
   renderKeySkills(document.getElementById("keySkills"), data.keySkills);
@@ -58,8 +62,8 @@ function renderCv(data) {
   }
 }
 
-function renderProfile(container, profile) {
-  if (!container) {
+function renderProfile(nameContainer, roleContainer, profile) {
+  if (!nameContainer || !roleContainer) {
     return;
   }
 
@@ -69,10 +73,8 @@ function renderProfile(container, profile) {
     .map(([, value]) => `<p>${escapeHtml(value)}</p>`)
     .join("");
 
-  container.innerHTML = `
-    <h1>${escapeHtml(name)}</h1>
-    ${extraFields}
-  `;
+  nameContainer.innerHTML = `<h1>${escapeHtml(name)}</h1>`;
+  roleContainer.innerHTML = extraFields;
 }
 
 function renderContact(container, contactBlock) {
