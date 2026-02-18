@@ -52,9 +52,7 @@ function renderCv(data) {
     document.getElementById("experience"),
     data.professionalExperience
   );
-  renderListBlock(document.getElementById("education"), data.education);
-  renderListBlock(document.getElementById("languages"), data.languages);
-  renderTextBlock(document.getElementById("about"), data.about);
+  renderAboutBlock(document.getElementById("about"), data.about);
   renderTextBlock(document.getElementById("preferences"), data.workPreferences);
 
   if (typeof window.initAccordion === "function") {
@@ -127,6 +125,49 @@ function renderListBlock(container, block) {
   container.innerHTML = `
     <h2>${escapeHtml(block?.title || "")}</h2>
     ${renderList(block?.items)}
+  `;
+}
+
+function renderAboutBlock(container, aboutBlock) {
+  if (!container) {
+    return;
+  }
+
+  const title = aboutBlock?.title || "";
+  const paragraphs = splitIntoParagraphs(aboutBlock?.text)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+
+  const education = aboutBlock?.education;
+  const languages = aboutBlock?.languages;
+
+  const nestedAccordions = `
+    ${renderAboutNestedAccordion("about-education", education)}
+    ${renderAboutNestedAccordion("about-languages", languages)}
+  `;
+
+  container.innerHTML = `
+    <h2>${escapeHtml(title)}</h2>
+    ${paragraphs}
+    ${nestedAccordions}
+  `;
+}
+
+function renderAboutNestedAccordion(id, block) {
+  if (!block || !Array.isArray(block.items) || block.items.length === 0) {
+    return "";
+  }
+
+  return `
+    <section class="accordion-item accordion-level-1" data-id="${escapeAttr(id)}">
+      <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
+        <h3>${escapeHtml(block.title || "")}</h3>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </div>
+      <div class="accordion-content">
+        ${renderList(block.items)}
+      </div>
+    </section>
   `;
 }
 
