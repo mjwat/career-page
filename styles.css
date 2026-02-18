@@ -1,12 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap");
 
 :root {
-    --text-primary: #002211;
-    --heading-h1: #233c32;
-    --heading-h2: #244a39;
-    --heading-h3: #295c4c;
-    --heading-h4: #1f5243;
-    --heading-h5: #2a655f;
+    --color-text: #002211;
+    --color-accent: #295c4c;
+    --color-background: linear-gradient(to bottom, #eff4fb 0%, #fafffc 100%);
 }
 
 html,
@@ -16,8 +13,8 @@ body {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #f8fbff 0%, #fafffc 100%);
-    color: var(--text-primary);
+    background: var(--color-background);
+    color: var(--color-text);
     font-family: "Fira Code", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
         "Courier New", monospace;
     line-height: 1.45;
@@ -71,25 +68,10 @@ main#app {
     padding: 1rem 20%;
 }
 
-h1 {
-    color: var(--heading-h1);
+h1, h2, h3, h4, h5 {
+    color: var(--color-accent);
 }
 
-h2 {
-    color: var(--heading-h2);
-}
-
-h3 {
-    color: var(--heading-h3);
-}
-
-h4 {
-    color: var(--heading-h4);
-}
-
-h5 {
-    color: var(--heading-h5);
-}
 
 a,
 a:visited {
@@ -178,9 +160,14 @@ button:focus-visible {
 }
 
 ul {
-    padding-left: 15px;
+    padding-left: 1rem;
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
+}
+
+li {
+    padding-bottom: 0.5rem;
+
 }
 
 [data-lang][data-active="true"] {
