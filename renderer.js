@@ -70,10 +70,8 @@ function renderProfile(container, profile) {
     .join("");
 
   container.innerHTML = `
-    <header>
-      <h1>${escapeHtml(name)}</h1>
-      ${extraFields}
-    </header>
+    <h1>${escapeHtml(name)}</h1>
+    ${extraFields}
   `;
 }
 
