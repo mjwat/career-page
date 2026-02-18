@@ -154,7 +154,7 @@
         "companyType": "Service Company",
         "period": "2017 - 2025",
         "projects": "Comfy, L’Oréal, Puma, Canon, and others | E-commerce",
-        "stack": "Web and Mobile (iOS, Android), Magento, Jira, Redmine, Trello, TestLink, DevTools, Postman, Altair, cURL, REST, CLI/SSH, MySQL, GraphQL, Selenium WebDriver (Java / JS), Mockoon, Graylog, Jenkins, Flutter, FileZilla, Figma, Notion, Google Docs/Sheets, Confluence",
+        "stack": "Web and Mobile (iOS, Android), Magento, Jira, Redmine, Trello, TestLink, DevTools, Postman, Altair, cURL, REST, CLI/SSH, MySQL, GraphQL, Selenium WebDriver (Java / JS), Mockoon, Graylog, Jenkins, Flutter, FileZilla, Figma, Notion, Google Docs/Sheets, Google Analytics, Confluence",
         "responsibilities": {
           "projectRelated": [
             "Analyze requirements (business logic, user scenarios, design specifications)",

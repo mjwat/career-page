@@ -89,7 +89,11 @@ function renderContact(container, contactBlock) {
         return `<li><strong>${escapeHtml(label)}:</strong> <a href="mailto:${escapeAttr(value)}">${escapeHtml(value)}</a></li>`;
       }
       if (key === "linkedin") {
-        return `<li><strong>${escapeHtml(label)}:</strong> <a href="${escapeAttr(value)}" target="_blank" rel="noopener noreferrer">${escapeHtml(value)}</a></li>`;
+        const rawValue = String(value || "");
+        const href = /^(https?:\/\/)/i.test(rawValue)
+          ? rawValue
+          : `https://${rawValue}`;
+        return `<li><strong>${escapeHtml(label)}:</strong> <a href="${escapeAttr(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(rawValue)}</a></li>`;
       }
       return `<li><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</li>`;
     })

@@ -91,6 +91,18 @@ h5 {
     color: var(--heading-h5);
 }
 
+a,
+a:visited {
+    color: #227455;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+    color: #007648;
+    text-decoration: underline;
+}
+
 .accordion-header {
     cursor: pointer;
     display: flex;
@@ -111,7 +123,7 @@ h5 {
 }
 
 .accordion-header:active {
-    color: #666;
+    color: #63736b;
 }
 
 .accordion-content {
