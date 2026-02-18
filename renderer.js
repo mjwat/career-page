@@ -46,7 +46,7 @@ function renderCv(data) {
     data.profile
   );
   renderContact(document.getElementById("contact"), data.contact);
-  renderTextBlock(document.getElementById("summary"), data.summary);
+  renderTextBlock(document.getElementById("summary"), data.summary, true);
   renderKeySkills(document.getElementById("keySkills"), data.keySkills);
   renderExperience(
     document.getElementById("experience"),
@@ -105,20 +105,29 @@ function renderContact(container, contactBlock) {
   `;
 }
 
-function renderTextBlock(container, block) {
+function renderTextBlock(container, block, allowInlineHtml = false) {
   if (!container) {
     return;
   }
 
   const title = block?.title || "";
   const paragraphs = splitIntoParagraphs(block?.text)
-    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .map((line) =>
+      `<p>${allowInlineHtml ? sanitizeInlineMarkup(line) : escapeHtml(line)}</p>`
+    )
     .join("");
 
   container.innerHTML = `
     <h2>${escapeHtml(title)}</h2>
     ${paragraphs}
   `;
+}
+
+function sanitizeInlineMarkup(value) {
+  const escaped = escapeHtml(value);
+  return escaped
+    .replace(/&lt;(\/?)(strong|b)&gt;/gi, "<$1$2>")
+    .replace(/&lt;br\s*\/?&gt;/gi, "<br>");
 }
 
 function renderListBlock(container, block) {
