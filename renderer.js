@@ -53,7 +53,10 @@ function renderCv(data) {
     data.professionalExperience
   );
   renderAboutBlock(document.getElementById("about"), data.about);
-  renderTextBlock(document.getElementById("preferences"), data.workPreferences);
+  renderWorkPreferencesBlock(
+    document.getElementById("preferences"),
+    data.workPreferences
+  );
 
   if (typeof window.initAccordion === "function") {
     window.initAccordion();
@@ -184,6 +187,56 @@ function renderAboutNestedAccordion(id, block) {
   `;
 }
 
+function renderWorkPreferencesBlock(container, block) {
+  if (!container) {
+    return;
+  }
+
+  const title = block?.title || "";
+  const sections = Object.entries(block || {})
+    .filter(([key]) => key !== "title")
+    .map(([, value]) => renderPreferenceSection(value))
+    .filter(Boolean)
+    .join("");
+
+  container.innerHTML = `
+    <h2>${escapeHtml(title)}</h2>
+    ${sections}
+  `;
+}
+
+function renderPreferenceSection(value) {
+  if (typeof value === "string") {
+    const text = splitIntoParagraphs(value)
+      .map((line) => `<p>${escapeHtml(line)}</p>`)
+      .join("");
+    return text;
+  }
+
+  if (!value || typeof value !== "object") {
+    return "";
+  }
+
+  const title = value.title ? `${escapeHtml(value.title)}:` : "";
+  const textLines = splitIntoParagraphs(value.text);
+  const text = textLines
+    .map((line, index) => {
+      if (index === 0 && title) {
+        return `<p><strong>${title}</strong> ${escapeHtml(line)}</p>`;
+      }
+      return `<p>${escapeHtml(line)}</p>`;
+    })
+    .join("");
+  const list = Array.isArray(value.items) ? renderList(value.items) : "";
+
+  return `
+    <section>
+      ${text}
+      ${list}
+    </section>
+  `;
+}
+
 function renderKeySkills(container, block) {
   if (!container) {
     return;
@@ -274,6 +327,13 @@ function renderExperience(container, block) {
       const stack = item?.stack
         ? `<p><strong>${escapeHtml(labels.stack || "stack")}:</strong> ${escapeHtml(item.stack)}</p>`
         : "";
+      const tech = item?.tech
+        ? `<p><strong>${escapeHtml(labels.tech || "tech")}:</strong> ${escapeHtml(item.tech)}</p>`
+        : "";
+      const platformsValue = item?.platforms || item?.platform;
+      const platforms = platformsValue
+        ? `<p><strong>${escapeHtml(labels.platforms || labels.platform || "platforms")}:</strong> ${escapeHtml(platformsValue)}</p>`
+        : "";
 
       const responsibilities = renderExpGroupAccordion(
         labels.responsibilities || "responsibilities",
@@ -299,6 +359,8 @@ function renderExperience(container, block) {
               ${company}
               ${projects}
               ${stack}
+              ${tech}
+              ${platforms}
               ${responsibilities}
               ${achievements}
             </div>

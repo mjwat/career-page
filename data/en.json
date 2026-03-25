@@ -16,10 +16,10 @@
   },
   "summary": {
     "title": "Summary",
-    "text": "Experienced in <b>functional</b> testing of <b>web</b> and <b>mobile</b> applications, <b>requirements analysis</b>, and identifying risks and gaps. Skilled in defining testing <b>strategies</b> aligned with project objectives.\n\nI support teams in delivering products with a predictable level of quality and take a practical, thoughtful approach to testing, tailoring the level of formalization to project goals and maturity."
+    "text": "Experienced in <b>functional</b> testing of <b>web</b> and <b>mobile</b> applications, <b>requirements analysis</b>, and identifying risks and gaps. Skilled in defining testing <b>strategies</b> aligned with project objectives.\n\nI support teams in delivering products with a <b>predictable level of quality</b> and take a practical, thoughtful approach to testing, tailoring the level of formalization to project goals and maturity."
   },
   "keySkills": {
-    "title": "Key Skills",
+    "title": "Core Skills",
     "categories": {
       "testingAnalysis": {
         "title": "Testing & Analysis",
@@ -91,7 +91,8 @@
               "Katalon Studio",
               "Git",
               "Mockoon",
-              "Jenkins"
+              "Jenkins",
+              "AI (Codex)"
             ]
           },
           "debuggingMonitoring": {
@@ -142,6 +143,8 @@
       "company": "Company",
       "projects": "Projects",
       "stack": "Stack",
+      "tech": "Tech & Tools",
+      "platforms": "Platforms",
       "responsibilities": "Responsibilities",
       "achievements": "Achievements",
       "projectRelated": "Project-related",
@@ -153,16 +156,19 @@
         "company": "Oggetto",
         "companyType": "Service Company",
         "period": "2017 - 2025",
-        "projects": "Comfy, L’Oréal, Puma, Canon, and others | E-commerce",
-        "stack": "Web and Mobile (iOS, Android), Magento, Jira, Redmine, Trello, TestLink, DevTools, Postman, Altair, cURL, REST, CLI/SSH, MySQL, GraphQL, Selenium WebDriver (Java / JS), Mockoon, Graylog, Jenkins, Flutter, FileZilla, Figma, Notion, Google Docs/Sheets, Google Analytics, Confluence",
+        "projects": "Puma, L’Oréal, Canon, Comfy,  and others | E-commerce",
+        "stack": "Magento 2 (PHP, JavaScript), Flutter (iOS, Android), MySQL, REST API, GraphQL",
+        "tech": "DevTools, Postman, Altair, cURL, CLI/SSH, TestLink, Jira, Redmine, Trello, Selenium WebDriver (Java, JS), Mockoon, Graylog, Jenkins, FileZilla, Figma, Notion, Google Docs, Google Sheets, Google Analytics, Confluence",
+        "platforms": "Web, Mobile (iOS, Android)",
         "responsibilities": {
           "projectRelated": [
             "Analyze requirements (business logic, user scenarios, design specifications)",
             "Test web and mobile applications (iOS, Android)",
-            "Plan and execute functional, regression, smoke, and exploratory testing",
+            "Plan and execute functional, regression, smoke, system and exploratory testing",
             "Identify, localize, and document defects",
             "Track and manage defects in task tracking systems (Jira, Redmine, Trello)",
             "Create and maintain test documentation (checklists, test cases, test plans, test execution reports, defect reports)",
+            "Perform system testing of complex business logic, including shared cart functionality, role-based access, product catalog behavior, marketing rules, checkout flows, and order management",
             "Test integrations with third-party services (payments, delivery services, warehouses, notifications, etc.)",
             "Perform API testing (REST / GraphQL using Postman, Altair, cURL) and database testing (MySQL)",
             "Analyze logs using CLI tools and Graylog",
@@ -191,12 +197,14 @@
         }
       },
       {
-        "position": "Test Engineer / Test Analyst",
+        "position": "QA Analyst",
         "company": "404Hub",
         "companyType": "Startup",
-        "period": "2024 - 2025",
-        "projects": "404Hub | Educational platform, YHub | Hosting service",
-        "stack": "Web, Telegram Bot, ClickUp, DevTools, Postman, REST, CLI/SSH, MySQL, Figma, Miro, Google Docs/Sheets",
+        "period": "2024 - 2026",
+        "projects": "404Hub | Educational platform, YHub | Hosting service, EduMix | Interactive course builder",
+        "stack": "Laravel, Vue, Next, MySQL, REST API, Telegram API",
+        "tech": "DevTools, Postman, CLI/SSH, AI (Codex), Pytest, ClickUp, Figma, Miro, Google Docs, Google Sheets",
+        "platforms": "Web, Telegram",
         "responsibilities": {
           "projectRelated": [
             "Perform testing of Telegram bot functionality migration to a new web platform during the initial phase",
@@ -209,33 +217,37 @@
         },
         "achievements": {
           "projectRelated": [
-            "Identified and refined incomplete user scenarios, reducing the number of stalled features and increasing the practical value of implemented functionality",
-            "Created a comprehensive test model of the service (including API methods, entities, and their relationships) based on both implemented and planned functionality, enabling clear visualization of system dependencies and supporting task prioritization and workload distribution among developers"
+            "Identified gaps in user scenarios and clarified requirements, reducing blocked features and improving delivery consistency",
+            "Built a system test model (API, entities, relationships) to improve dependency visibility and prioritization",
+            "Created a smoke test suite to enable fast post-release validation and reduce regression risks",
+            "Partially automated smoke tests (API and end-to-end), reducing manual testing effort and speeding up validation cycles"
           ],
           "nonProjectRelated": []
         }
       },
       {
-        "position": "Test Engineer / Test Analyst",
+        "position": "Test Analyst",
         "company": "Ruta",
         "companyType": "Startup",
         "period": "2022 - 2023",
         "projects": "RutaJob | Recruitment Platform",
-        "stack": "Web, Trello, DevTools, Postman, CLI/SSH, MySQL, Figma, Miro, Google Docs/Sheets",
+        "stack": "Laravel, Vue, Nuxt, MySQL, REST API",
+        "tech": "DevTools, Postman, CLI/SSH, Trello, Figma, Miro, Google Docs, Google Sheets",
+        "platforms": "Web",
         "responsibilities": {
           "projectRelated": [
-            "Perform functional and UI testing, including validation against design mockups, and evaluated usability",
-            "Report identified issues and provided improvement recommendations",
-            "Define and documented user scenarios for three roles: employer, employer representative, and job seeker",
-            "Collaborate with the product owner, developers, and designers"
+            "Perform functional and UI testing, including validation against design mockups, and evaluate usability",
+            "Report defects and provide improvement recommendations",
+            "Define and document role-based user scenarios",
+            "Collaborate with product owner, developers, and designers"
           ],
           "nonProjectRelated": []
         },
         "achievements": {
           "projectRelated": [
-            "Collaborated with the team to define the minimum viable requirements and development priorities, enabling faster validation of the product hypothesis and early prototype delivery to initial loyal users without excessive development effort",
-            "Identified critical defects in the job-to-candidate matching calculation logic",
-            "Created a structured test checklist and transformed it into a comprehensive test report covering the entire system functionality, clearly highlighting inconsistencies and implementation gaps"
+            "Contributed to MVP definition and prioritization, enabling faster product validation and early delivery",
+            "Identified critical defects in job-to-candidate matching logic, preventing incorrect search results",
+            "Created a structured test checklist and transformed it into a comprehensive test report, improving visibility of system gaps and inconsistencies"
           ],
           "nonProjectRelated": []
         }
@@ -245,21 +257,24 @@
         "company": "Newizze",
         "companyType": "Service Company",
         "period": "2021",
-        "projects": "Personal Account Portal for Utility Service Providers",
-        "stack": "Web, Trello, DevTools, MySQL, CLI/SSH, Miro, Google Docs/Sheets",
+        "projects": "EnergoSoft | Utility Service Providers",
+        "stack": "Laravel, Vue, MySQL, REST API",
+        "tech": "DevTools, CLI/SSH, Miro, Trello, Google Docs, Google Sheets",
+        "platforms": "Web",
         "responsibilities": {
           "projectRelated": [
-            "Test the service (primarily backend, minimal frontend) and assessed release readiness",
+            "Test the service (primarily backend, minimal frontend) and assess release readiness",
             "Prepare detailed bug reports",
             "Perform re-testing after bug fixes",
-            "Collaborate directly with developers (no dedicated project manager involved)"
+            "Collaborate directly with developers in the absence of a dedicated project manager"
           ],
           "nonProjectRelated": []
         },
         "achievements": {
           "projectRelated": [
-            "Identified and clarified requirement gaps (e.g., media formats and size limitations, mandatory fields), helping balance regulatory compliance, usability for users of different age groups, and product release timelines",
-            "Conducted exploratory testing and reported defects, helping ensure a stable release without critical issues, which resulted in positive feedback from early users."
+            "Identified and clarified requirement gaps (e.g., media formats, size limitations, mandatory fields)",
+            "Suggested improvements to the service, balancing regulatory compliance, usability, and release timelines",
+            "Conducted exploratory testing and identified critical defects, contributing to a stable release without major issues"
           ],
           "nonProjectRelated": []
         }
@@ -269,8 +284,10 @@
         "company": "Oggetto",
         "companyType": "Service Company",
         "period": "2016 - 2017",
-        "projects": "",
-        "stack": "Service Desk, Redmine, Magento, Google Docs",
+        "projects": "Inchcape, Puma, L’Oréal, Canon, Comfy, Rockwool,  and others | E-commerce",
+        "stack": "Magento 2 (PHP, JavaScript)",
+        "tech": "Service Desk, Redmine, Google Docs, Google Sheets",
+        "platforms": "Web and Mobile (iOS, Android)",
         "responsibilities": {
           "projectRelated": [
             "Register and classified incoming support requests",
@@ -312,6 +329,18 @@
   },
   "workPreferences": {
     "title": "Work Preferences",
-    "text": "Open to remote contract or freelance opportunities only.\n\nNOT considering projects related to gambling or betting."
+    "availability": {
+      "title": "Availability",
+      "text": "Remote / Contract / Freelance"
+    },
+    "interests": {
+      "title": "Areas of interest",
+      "text": "EdTech, Fintech, E-commerce, CRM and ERP systems; interested in emerging fields such as Engineering and Med/Health sectors"
+    },
+    "avoid": {
+      "title": "Avoid",
+      "text": "Projects related to Gambling or Betting"
+    }
+    
   }
 }
