@@ -156,7 +156,7 @@
         "company": "Oggetto",
         "companyType": "Service Company",
         "period": "2017 - 2025",
-        "projects": "Puma, L’Oréal, Canon, Comfy,  and others | E-commerce",
+        "projects": "Puma, L’Oréal, Canon, Comfy, and others | E-commerce",
         "stack": "Magento 2 (PHP, JavaScript), Flutter (iOS, Android), MySQL, REST API, GraphQL",
         "tech": "DevTools, Postman, Altair, cURL, CLI/SSH, TestLink, Jira, Redmine, Trello, Selenium WebDriver (Java, JS), Mockoon, Graylog, Jenkins, FileZilla, Figma, Notion, Google Docs, Google Sheets, Google Analytics, Confluence",
         "platforms": "Web, Mobile (iOS, Android)",
@@ -287,7 +287,7 @@
         "projects": "Inchcape, Puma, L’Oréal, Canon, Comfy, Rockwool,  and others | E-commerce",
         "stack": "Magento 2 (PHP, JavaScript)",
         "tech": "Service Desk, Redmine, Google Docs, Google Sheets",
-        "platforms": "Web and Mobile (iOS, Android)",
+        "platforms": "Web",
         "responsibilities": {
           "projectRelated": [
             "Register and classified incoming support requests",
@@ -331,7 +331,7 @@
     "title": "Work Preferences",
     "availability": {
       "title": "Availability",
-      "text": "Remote / Contract / Freelance"
+      "text": "Remote, Contract / Freelance, Full-time / Part-time"
     },
     "interests": {
       "title": "Areas of interest",

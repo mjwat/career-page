@@ -308,7 +308,7 @@ function renderExperience(container, block) {
       if (item?.period) {
         headerParts.push(item.period);
       }
-      const header = `<h3>${escapeHtml(headerParts.join(", "))}</h3>`;
+      const headerTitle = `<h3>${escapeHtml(headerParts.join(", "))}</h3>`;
 
       const companyParts = [];
       if (item?.company) {
@@ -317,8 +317,8 @@ function renderExperience(container, block) {
       if (item?.companyType) {
         companyParts.push(`(${item.companyType})`);
       }
-      const company = companyParts.length
-        ? `<p><strong>${escapeHtml(labels.company || "company")}:</strong> ${escapeHtml(companyParts.join(" "))}</p>`
+      const companySummary = companyParts.length
+        ? `<p class="experience-company-preview"><strong>${escapeHtml(labels.company || "company")}:</strong> ${escapeHtml(companyParts.join(" "))}</p>`
         : "";
 
       const projects = item?.projects
@@ -351,12 +351,14 @@ function renderExperience(container, block) {
       return `
         <article class="experience-item accordion-item accordion-level-1" data-id="${escapeAttr(jobId)}">
           <div class="accordion-header" role="button" tabindex="0" aria-expanded="false">
-            ${header}
+            <div class="experience-header-text">
+              ${headerTitle}
+            </div>
             <span class="accordion-icon" aria-hidden="true">+</span>
           </div>
+          ${companySummary}
           <div class="accordion-content accordion-content-level-1">
             <div class="experience-content">
-              ${company}
               ${projects}
               ${stack}
               ${tech}
