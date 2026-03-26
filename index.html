@@ -13,7 +13,16 @@
     <header class="site-header">
       <div class="header-top">
         <div id="profile-name"></div>
-        <nav aria-label="Language switcher">
+        <nav class="language-switcher" aria-label="Language switcher">
+          <button
+            id="egg-trigger"
+            class="egg-button"
+            type="button"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            <img src="images/egg.png" alt="" />
+          </button>
           <button id="lang-en" class="glass-button" type="button" data-lang="en">EN</button>
           <button id="lang-ru" class="glass-button" type="button" data-lang="ru">RU</button>
         </nav>
@@ -31,9 +40,19 @@
     <footer class="page-footer">
       <button id="scroll-top" class="glass-button" type="button" aria-label="Scroll to top">^</button>
     </footer>
+    <div id="egg-modal-overlay" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="egg-modal-title">
+        <button id="egg-modal-close" class="modal-close" type="button" aria-label="Close">×</button>
+        <pre id="egg-modal-title"><code>if (cv.match(role.requirements)) {
+    interview.schedule(now)
+    me.happy()
+}</code></pre>
+      </div>
+    </div>
     <script src="renderer.js"></script>
     <script src="accordion.js"></script>
     <script src="langSwitcher.js"></script>
+    <script src="easterEgg.js"></script>
     <script src="scrollTop.js"></script>
   </body>
 </html>
