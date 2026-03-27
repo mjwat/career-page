@@ -9,13 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let hideTimerId = null;
+  let isModalOpen = false;
+
+  const clearHideTimer = () => {
+    if (hideTimerId) {
+      clearTimeout(hideTimerId);
+      hideTimerId = null;
+    }
+  };
 
   const showEgg = () => {
     egg.classList.add("is-visible");
-    if (hideTimerId) {
-      clearTimeout(hideTimerId);
-    }
+    clearHideTimer();
     hideTimerId = setTimeout(() => {
+      if (isModalOpen) {
+        return;
+      }
       egg.classList.remove("is-visible");
       hideTimerId = null;
     }, 10000);
@@ -26,13 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
   switcher.addEventListener("click", showEgg);
 
   const openModal = () => {
+    isModalOpen = true;
+    clearHideTimer();
+    egg.classList.add("is-visible");
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
   };
 
   const closeModal = () => {
+    isModalOpen = false;
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
+    egg.classList.remove("is-visible");
   };
 
   egg.addEventListener("click", (event) => {
